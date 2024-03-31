@@ -1,0 +1,632 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F8728A53-ABB9-43AA-ABAC-71051BFBC0CE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>스쿼드_도서관</RootNamespace>
+    <AssemblyName>스쿼드 도서관</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.14.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.2.6\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.2.6\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.27.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\Ubiety.Dns.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.27\lib\net452\ZstdNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="bookcall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="bookcall.Designer.cs">
+      <DependentUpon>bookcall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="bookdata.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="bookdata.Designer.cs">
+      <DependentUpon>bookdata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="bookinformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="bookinformation.Designer.cs">
+      <DependentUpon>bookinformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="bookmanagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="bookmanagement.Designer.cs">
+      <DependentUpon>bookmanagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\alluser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="data\alluser.Designer.cs">
+      <DependentUpon>alluser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\bookoverdue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="data\bookoverdue.Designer.cs">
+      <DependentUpon>bookoverdue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\bookrequest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="data\bookrequest.Designer.cs">
+      <DependentUpon>bookrequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\bookreturn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="data\bookreturn.Designer.cs">
+      <DependentUpon>bookreturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\managernotice.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="data\managernotice.Designer.cs">
+      <DependentUpon>managernotice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\mydata.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="data\mydata.Designer.cs">
+      <DependentUpon>mydata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\booksetup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="data\booksetup.Designer.cs">
+      <DependentUpon>booksetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\ABCDE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data\ABCDE.Designer.cs">
+      <DependentUpon>ABCDE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\QA.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="data\QA.Designer.cs">
+      <DependentUpon>QA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\bookname.cs" />
+    <Compile Include="data\User_Homepage1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data\User_Homepage1.Designer.cs">
+      <DependentUpon>User_Homepage1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\User_Search2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data\User_Search2.Designer.cs">
+      <DependentUpon>User_Search2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\User_login1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data\User_login1.Designer.cs">
+      <DependentUpon>User_login1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\Mypage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data\Mypage.Designer.cs">
+      <DependentUpon>Mypage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\User_Search1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data\User_Search1.Designer.cs">
+      <DependentUpon>User_Search1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\User_login2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data\User_login2.Designer.cs">
+      <DependentUpon>User_login2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\manager_login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data\manager_login.Designer.cs">
+      <DependentUpon>manager_login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\User_Homepage2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data\User_Homepage2.Designer.cs">
+      <DependentUpon>User_Homepage2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="data\Program.cs" />
+    <Compile Include="managerrequest2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="managerrequest2.Designer.cs">
+      <DependentUpon>managerrequest2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mn_newbook.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="mn_newbook.Designer.cs">
+      <DependentUpon>mn_newbook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QAcoment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QAcoment.Designer.cs">
+      <DependentUpon>QAcoment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QAcontent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QAcontent.Designer.cs">
+      <DependentUpon>QAcontent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="libraryguide01.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="libraryguide01.Designer.cs">
+      <DependentUpon>libraryguide01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="libraryguide02.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="libraryguide02.Designer.cs">
+      <DependentUpon>libraryguide02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="library_set.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="library_set.Designer.cs">
+      <DependentUpon>library_set.cs</DependentUpon>
+    </Compile>
+    <Compile Include="managerrequest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="managerrequest.Designer.cs">
+      <DependentUpon>managerrequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="manager_Homepage0.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="manager_Homepage0.Designer.cs">
+      <DependentUpon>manager_Homepage0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="manager_Hompage2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="manager_Hompage2.Designer.cs">
+      <DependentUpon>manager_Hompage2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mydatachange.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="mydatachange.Designer.cs">
+      <DependentUpon>mydatachange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="set2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="set2.Designer.cs">
+      <DependentUpon>set2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="userbook3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="userbook3.Designer.cs">
+      <DependentUpon>userbook3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="userbookmark.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="userbookmark.Designer.cs">
+      <DependentUpon>userbookmark.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Userbookpurchase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Userbookpurchase.Designer.cs">
+      <DependentUpon>Userbookpurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="userbookrental.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="userbookrental.Designer.cs">
+      <DependentUpon>userbookrental.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Userbookrequest1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Userbookrequest1.Designer.cs">
+      <DependentUpon>Userbookrequest1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="userlibraryuse01.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="userlibraryuse01.Designer.cs">
+      <DependentUpon>userlibraryuse01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="userlibraryuse02.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="userlibraryuse02.Designer.cs">
+      <DependentUpon>userlibraryuse02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Userlibraryuse2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Userlibraryuse2.Designer.cs">
+      <DependentUpon>Userlibraryuse2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="usernewbook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="usernewbook.Designer.cs">
+      <DependentUpon>usernewbook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="usernotice.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="usernotice.Designer.cs">
+      <DependentUpon>usernotice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="usernotice01.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="usernotice01.Designer.cs">
+      <DependentUpon>usernotice01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Useroverdue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Useroverdue.Designer.cs">
+      <DependentUpon>Useroverdue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="userQA.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="userQA.Designer.cs">
+      <DependentUpon>userQA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="userQA01.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="userQA01.Designer.cs">
+      <DependentUpon>userQA01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="usersearch2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="usersearch2.Designer.cs">
+      <DependentUpon>usersearch2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Userunregister.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Userunregister.Designer.cs">
+      <DependentUpon>Userunregister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="user_compliance.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="user_compliance.Designer.cs">
+      <DependentUpon>user_compliance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="user_compliance01.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="user_compliance01.Designer.cs">
+      <DependentUpon>user_compliance01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="user_recommend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="user_recommend.Designer.cs">
+      <DependentUpon>user_recommend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User_Search3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User_Search3.Designer.cs">
+      <DependentUpon>User_Search3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User_Search4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User_Search4.Designer.cs">
+      <DependentUpon>User_Search4.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="bookcall.resx">
+      <DependentUpon>bookcall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bookdata.resx">
+      <DependentUpon>bookdata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bookinformation.resx">
+      <DependentUpon>bookinformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bookmanagement.resx">
+      <DependentUpon>bookmanagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\alluser.resx">
+      <DependentUpon>alluser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\bookoverdue.resx">
+      <DependentUpon>bookoverdue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\bookrequest.resx">
+      <DependentUpon>bookrequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\bookreturn.resx">
+      <DependentUpon>bookreturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\managernotice.resx">
+      <DependentUpon>managernotice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\mydata.resx">
+      <DependentUpon>mydata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\booksetup.resx">
+      <DependentUpon>booksetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\ABCDE.resx">
+      <DependentUpon>ABCDE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\QA.resx">
+      <DependentUpon>QA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\User_Homepage1.resx">
+      <DependentUpon>User_Homepage1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\User_Search2.resx">
+      <DependentUpon>User_Search2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\User_login1.resx">
+      <DependentUpon>User_login1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\Mypage.resx">
+      <DependentUpon>Mypage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\User_Search1.resx">
+      <DependentUpon>User_Search1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\User_login2.resx">
+      <DependentUpon>User_login2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\manager_login.resx">
+      <DependentUpon>manager_login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\User_Homepage2.resx">
+      <DependentUpon>User_Homepage2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="managerrequest2.resx">
+      <DependentUpon>managerrequest2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mn_newbook.resx">
+      <DependentUpon>mn_newbook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QAcoment.resx">
+      <DependentUpon>QAcoment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QAcontent.resx">
+      <DependentUpon>QAcontent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="libraryguide01.resx">
+      <DependentUpon>libraryguide01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="libraryguide02.resx">
+      <DependentUpon>libraryguide02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="library_set.resx">
+      <DependentUpon>library_set.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="managerrequest.resx">
+      <DependentUpon>managerrequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="manager_Homepage0.resx">
+      <DependentUpon>manager_Homepage0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="manager_Hompage2.resx">
+      <DependentUpon>manager_Hompage2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mydatachange.resx">
+      <DependentUpon>mydatachange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="set2.resx">
+      <DependentUpon>set2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userbook3.resx">
+      <DependentUpon>userbook3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userbookmark.resx">
+      <DependentUpon>userbookmark.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Userbookpurchase.resx">
+      <DependentUpon>Userbookpurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userbookrental.resx">
+      <DependentUpon>userbookrental.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Userbookrequest1.resx">
+      <DependentUpon>Userbookrequest1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userlibraryuse01.resx">
+      <DependentUpon>userlibraryuse01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userlibraryuse02.resx">
+      <DependentUpon>userlibraryuse02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Userlibraryuse2.resx">
+      <DependentUpon>Userlibraryuse2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="usernewbook.resx">
+      <DependentUpon>usernewbook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="usernotice.resx">
+      <DependentUpon>usernotice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="usernotice01.resx">
+      <DependentUpon>usernotice01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Useroverdue.resx">
+      <DependentUpon>Useroverdue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userQA.resx">
+      <DependentUpon>userQA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="userQA01.resx">
+      <DependentUpon>userQA01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="usersearch2.resx">
+      <DependentUpon>usersearch2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Userunregister.resx">
+      <DependentUpon>Userunregister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="user_compliance.resx">
+      <DependentUpon>user_compliance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="user_compliance01.resx">
+      <DependentUpon>user_compliance01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="user_recommend.resx">
+      <DependentUpon>user_recommend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_Search3.resx">
+      <DependentUpon>User_Search3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_Search4.resx">
+      <DependentUpon>User_Search4.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\로고.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\짧은거.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\적당.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\도서관 위치1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\도서관 외관.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
