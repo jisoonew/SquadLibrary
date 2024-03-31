@@ -21,8 +21,6 @@ namespace 스쿼드_도서관
 
         private void User_login1_Load(object sender, EventArgs e)
         {
-            //datasource=localhost;port=3306;username=root;password=1234;
-            //Server=localhost;Port=3306;Database=coding32;Uid=root;Pwd=1111
             try
             {
                 MySqlConnection connection = new MySqlConnection("datasource = localhost; port = 3306; username=root; password=1234");
