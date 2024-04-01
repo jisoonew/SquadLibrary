@@ -18,11 +18,13 @@ namespace 스쿼드_도서관
             InitializeComponent();
         }
 
+        string myConnection = "datasource=localhost;port=3306;username=root;password=1234";
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                string myConnection = "datasource=localhost;port=3306;username=root;password=1234";
+                
                 MySqlConnection myConn = new MySqlConnection(myConnection);
 
                 MySqlCommand SelectCommand = new MySqlCommand("select * from squad_library.mydata where 아이디 = '" + textBox1.Text + "' and 비밀번호='" + textBox2.Text + "'", myConn);

@@ -66,7 +66,6 @@ namespace 스쿼드_도서관
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(166, 21);
             this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -89,7 +88,6 @@ namespace 스쿼드_도서관
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "남자";
             this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // button1
             // 
@@ -101,7 +99,7 @@ namespace 스쿼드_도서관
             this.button1.TabIndex = 3;
             this.button1.Text = "중복확인";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label2
             // 
@@ -141,7 +139,6 @@ namespace 스쿼드_도서관
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(166, 21);
             this.textBox2.TabIndex = 6;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label4
             // 
@@ -169,7 +166,6 @@ namespace 스쿼드_도서관
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(227, 21);
             this.textBox3.TabIndex = 9;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label6
             // 
@@ -187,7 +183,6 @@ namespace 스쿼드_도서관
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(155, 21);
             this.textBox4.TabIndex = 11;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label7
             // 
@@ -211,7 +206,6 @@ namespace 스쿼드_도서관
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(102, 20);
             this.comboBox1.TabIndex = 14;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -229,7 +223,6 @@ namespace 스쿼드_도서관
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(227, 21);
             this.textBox5.TabIndex = 15;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // label9
             // 
@@ -258,7 +251,6 @@ namespace 스쿼드_도서관
             this.textBox6.PasswordChar = '*';
             this.textBox6.Size = new System.Drawing.Size(227, 21);
             this.textBox6.TabIndex = 18;
-            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
             // label11
             // 
@@ -295,7 +287,6 @@ namespace 스쿼드_도서관
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(227, 72);
             this.textBox8.TabIndex = 23;
-            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // label14
             // 
@@ -313,7 +304,6 @@ namespace 스쿼드_도서관
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(227, 21);
             this.textBox9.TabIndex = 25;
-            this.textBox9.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
             // 
             // button2
             // 
@@ -324,7 +314,7 @@ namespace 스쿼드_도서관
             this.button2.TabIndex = 27;
             this.button2.Text = "확인";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button3
             // 
@@ -335,7 +325,7 @@ namespace 스쿼드_도서관
             this.button3.TabIndex = 28;
             this.button3.Text = "확인";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // label15
             // 

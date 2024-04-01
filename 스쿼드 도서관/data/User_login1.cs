@@ -19,11 +19,12 @@ namespace 스쿼드_도서관
             InitializeComponent();
         }
 
+        private MySqlConnection connection = new MySqlConnection("datasource = localhost; port = 3306; username=root; password=1234");
+
         private void User_login1_Load(object sender, EventArgs e)
         {
             try
             {
-                MySqlConnection connection = new MySqlConnection("datasource = localhost; port = 3306; username=root; password=1234");
                 MySqlDataAdapter adapter = new MySqlDataAdapter("select '회원명','성별','생년월일', '전화번호', '이메일', '이메일2', '아이디','비밀번호','주소','주소2'", connection);
 
                 connection.Open();
@@ -39,7 +40,7 @@ namespace 스쿼드_도서관
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3_Click(object sender, EventArgs e)
         {
             String en = textBox5.Text;
 
@@ -58,10 +59,8 @@ namespace 스쿼드_도서관
             }
             else
             {
-                MessageBox.Show("일반회원으로 등록되었습니다.");
+                MessageBox.Show("아이디 조건에 부합합니다.");
             }
-
-            string myconnect = "datasource = localhost; port = 3306; username=root; password=1234";
 
             radioButton1.CheckedChanged += uiRdb_Button_CheckedChanged;
 
@@ -87,21 +86,16 @@ namespace 스쿼드_도서관
                 string query = "insert into squad_library.mydata(회원명, 성별, 생년월일, 전화번호, 이메일, 이메일2, 아이디,비밀번호,주소,주소2)" +
                     "value('" + textBox1.Text + "', '" + radioButton1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + comboBox1.Text + "','" + textBox5.Text + "','" + textBox6.Text + "','" + textBox8.Text + "','" + textBox9.Text + "')";
 
-                MySqlConnection myconn = new MySqlConnection(myconnect);
-
-                MySqlCommand mycommand = new MySqlCommand(query, myconn);
-
-
-
+                MySqlCommand mycommand = new MySqlCommand(query, connection);
 
                 MySqlDataReader myReader;
                 try
                 {
 
-                    myconn.Open();
+                    connection.Open();
                     myReader = mycommand.ExecuteReader();
 
-                    myconn.Close();
+                    connection.Close();
 
                 }
                 catch (Exception ex)
@@ -115,21 +109,19 @@ namespace 스쿼드_도서관
                 string query = "insert into squad_library.mydata(회원명, 성별, 생년월일, 전화번호, 이메일, 이메일2, 아이디,비밀번호,주소,주소2)" +
                     "value('" + textBox1.Text + "', '" + radioButton2.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + comboBox1.Text + "','" + textBox5.Text + "','" + textBox6.Text + "','" + textBox8.Text + "','" + textBox9.Text + "')";
 
-                MySqlConnection myconn = new MySqlConnection(myconnect);
-
-                MySqlCommand mycommand = new MySqlCommand(query, myconn);
+                MySqlCommand mycommand = new MySqlCommand(query, connection);
 
 
                 MySqlDataReader myReader;
                 try
                 {
 
-                    myconn.Open();
+                    connection.Open();
                     myReader = mycommand.ExecuteReader();
 
                     MessageBox.Show("일반회원으로 등록되었습니다.");
 
-                    myconn.Close();
+                    connection.Close();
 
                 }
                 catch (Exception ex)
@@ -151,9 +143,7 @@ namespace 스쿼드_도서관
 
         private void LoadData()
         {
-            string sql = "Server=localhost;Port=3306;username=root;password=1234";
-            MySqlConnection con = new MySqlConnection(sql);
-            MySqlCommand cmd_db = new MySqlCommand("SELECT 회원명,성별,생년월일, 전화번호, 이메일, 이메일2, 아이디,비밀번호,주소,주소2  FROM squad_library.mydata;", con);
+            MySqlCommand cmd_db = new MySqlCommand("SELECT 회원명,성별,생년월일, 전화번호, 이메일, 이메일2, 아이디,비밀번호,주소,주소2  FROM squad_library.mydata;", connection);
 
             try
             {
@@ -182,12 +172,7 @@ namespace 스쿼드_도서관
             textBox9.Text = "";
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             String en = textBox5.Text;
 
@@ -196,7 +181,6 @@ namespace 스쿼드_도서관
 
             try
             {
-                MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=1234");
                 MySqlCommand SelecCommand = new MySqlCommand("select '회원명','성별','생년월일', '전화번호', '이메일', '이메일2', '아이디','비밀번호','주소','주소2' from squad_library.mydata where 아이디 = '"+this.textBox5.Text+"'", connection);
                 MySqlDataReader reader;
 
@@ -238,7 +222,7 @@ namespace 스쿼드_도서관
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
 
             try
@@ -264,101 +248,6 @@ namespace 스쿼드_도서관
         private string GetString(int v)
         {
             throw new NotImplementedException();
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-            string myconnect = "datasource=localhost;port=3306;username=root;password=1234";
-            string query = "insert into squad_library.mydata=(전화번호)" + "value ('" + textBox3.Text + "')";
-
-            MySqlConnection myconn = new MySqlConnection(myconnect);
-            MySqlCommand mycommand = new MySqlCommand(query, myconn);
-            myconn.Open();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            string myconnect = "datasource=localhost;port=3306;username=root;password=1234";
-            string query = "insert into squad_library.mydata=(회원명)" + "value ('" + textBox1.Text + "')";
-
-            MySqlConnection myconn = new MySqlConnection(myconnect);
-            MySqlCommand mycommand = new MySqlCommand(query, myconn);
-            myconn.Open();
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            string myconnect = "datasource=localhost;port=3306;username=root;password=1234";
-            string query = "insert into squad_library.mydata=(생년월일)" + "value ('" + textBox2.Text + "')";
-
-            MySqlConnection myconn = new MySqlConnection(myconnect);
-            MySqlCommand mycommand = new MySqlCommand(query, myconn);
-            myconn.Open();
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            string myconnect = "datasource=localhost;port=3306;username=root;password=1234";
-            string query = "insert into squad_library.mydata=(이메일)" + "value ('" + textBox4.Text + "')";
-
-            MySqlConnection myconn = new MySqlConnection(myconnect);
-            MySqlCommand mycommand = new MySqlCommand(query, myconn);
-            myconn.Open();
-        }
-
-        private void textBox8_TextChanged(object sender, EventArgs e)
-        {
-            string myconnect = "datasource=localhost;port=3306;username=root;password=1234";
-            string query = "insert into squad_library.mydata=(주소)" + "value ('" + textBox8.Text + "')";
-
-            MySqlConnection myconn = new MySqlConnection(myconnect);
-            MySqlCommand mycommand = new MySqlCommand(query, myconn);
-            myconn.Open();
-        }
-
-        private void textBox9_TextChanged(object sender, EventArgs e)
-        {
-            string myconnect = "datasource=localhost;port=3306;username=root;password=1234";
-            string query = "insert into squad_library.mydata=(주소2)" + "value ('" + textBox9.Text + "')";
-
-            MySqlConnection myconn = new MySqlConnection(myconnect);
-            MySqlCommand mycommand = new MySqlCommand(query, myconn);
-            myconn.Open();
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-            string myconnect = "datasource=localhost;port=3306;username=root;password=1234";
-            string query = "insert into squad_library.mydata=(아이디)" + "value ('" + textBox5.Text + "')";
-
-            MySqlConnection myconn = new MySqlConnection(myconnect);
-            MySqlCommand mycommand = new MySqlCommand(query, myconn);
-            myconn.Open();
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-            string myconnect = "datasource=localhost;port=3306;username=root;password=1234";
-            string query = "insert into squad_library.mydata=(비밀번호)" + "value ('" + textBox6.Text + "')";
-
-            MySqlConnection myconn = new MySqlConnection(myconnect);
-            MySqlCommand mycommand = new MySqlCommand(query, myconn);
-            myconn.Open();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string myconnect = "datasource=localhost;port=3306;username=root;password=1234";
-            string query = "insert into squad_library.mydata=(이메일)" + "value ('" + comboBox1.Text + "')";
-
-            MySqlConnection myconn = new MySqlConnection(myconnect);
-            MySqlCommand mycommand = new MySqlCommand(query, myconn);
-            myconn.Open();
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
