@@ -130,6 +130,7 @@ namespace 스쿼드_도서관
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(97, 24);
             this.comboBox1.TabIndex = 4;
+            this.comboBox1.Text = "전체";
             // 
             // groupBox1
             // 
@@ -225,7 +226,6 @@ namespace 스쿼드_도서관
             this.label5.Size = new System.Drawing.Size(63, 13);
             this.label5.TabIndex = 12;
             this.label5.Text = "도서 제목";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // pictureBox5
             // 

@@ -11,9 +11,9 @@ using MySql.Data.MySqlClient;
 
 namespace 스쿼드_도서관
 {
-    public partial class Useroverdue : UserControl
+    public partial class UserOverdue : UserControl
     {
-        public Useroverdue()
+        public UserOverdue()
         {
             InitializeComponent();
         }

@@ -25,12 +25,12 @@ namespace 스쿼드_도서관
         {
             try
             {
-                MySqlDataAdapter adapter = new MySqlDataAdapter("select '회원명','성별','생년월일', '전화번호', '이메일', '이메일2', '아이디','비밀번호','주소','주소2'", connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter("select '회원번호', '회원명','아이디', '비밀번호', '생년월일', '성별', '등급', '회원상태', '대출금지일', '전화번호', '이메일', '주소'", connection);
 
                 connection.Open();
 
                 DataSet ds = new DataSet();
-                adapter.Fill(ds, "mydata");
+                adapter.Fill(ds, "user");
 
                 connection.Close();
             }
@@ -40,22 +40,23 @@ namespace 스쿼드_도서관
             }
         }
 
+        // 회원가입
         private void Button3_Click(object sender, EventArgs e)
         {
-            String en = textBox5.Text;
+            String userId = textBox5.Text;
 
-            int en1;
-            en1 = en.Length;
+            int userIdLength;
+            userIdLength = userId.Length;
 
-            if (en1 > 15)
+            if (userIdLength > 15)
             {
                 MessageBox.Show("아이디가 15자를 초과하였습니다.");
-                en = "";
+                userId = "";
             }
-            else if (en1 < 5)
+            else if (userIdLength < 5)
             {
                 MessageBox.Show("아이디가 5자 미만입니다.");
-                en = "";
+                userId = "";
             }
             else
             {
@@ -81,9 +82,11 @@ namespace 스쿼드_도서관
                 MessageBox.Show(msg);
             }
 
+
+            // 여기서부터 코드 수정하기
             if (radioButton1.Checked == true)
             {
-                string query = "insert into squad_library.mydata(회원명, 성별, 생년월일, 전화번호, 이메일, 이메일2, 아이디,비밀번호,주소,주소2)" +
+                string query = "insert into squad_library.user('회원번호', '회원명','아이디', '비밀번호', '생년월일', '성별', '등급', '회원상태', '대출금지일', '전화번호', '이메일', '주소')" +
                     "value('" + textBox1.Text + "', '" + radioButton1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + comboBox1.Text + "','" + textBox5.Text + "','" + textBox6.Text + "','" + textBox8.Text + "','" + textBox9.Text + "')";
 
                 MySqlCommand mycommand = new MySqlCommand(query, connection);

@@ -160,7 +160,7 @@ namespace 스쿼드_도서관
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
-            // User_Search3
+            // UserAllSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -173,7 +173,7 @@ namespace 스쿼드_도서관
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "User_Search3";
+            this.Name = "UserAllSearch";
             this.Text = "User_Search3";
             this.Load += new System.EventHandler(this.User_Search3_Load);
             this.groupBox1.ResumeLayout(false);
@@ -190,7 +190,6 @@ namespace 스쿼드_도서관
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
@@ -198,5 +197,6 @@ namespace 스쿼드_도서관
         public System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.PictureBox pictureBox2;
     }
 }

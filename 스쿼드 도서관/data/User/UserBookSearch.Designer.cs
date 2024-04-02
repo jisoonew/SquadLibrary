@@ -206,7 +206,6 @@ namespace 스쿼드_도서관
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
@@ -214,5 +213,6 @@ namespace 스쿼드_도서관
         private System.Windows.Forms.Button button4;
         public System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button5;
+        public System.Windows.Forms.PictureBox pictureBox2;
     }
 }

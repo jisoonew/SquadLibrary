@@ -310,6 +310,7 @@ namespace 스쿼드_도서관
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(97, 24);
             this.comboBox1.TabIndex = 22;
+            this.comboBox1.Text = "전체";
             // 
             // button3
             // 

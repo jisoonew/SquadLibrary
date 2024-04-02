@@ -21,7 +21,7 @@ namespace 스쿼드_도서관
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string myconnect = "datasource = localhost; port = 3306; username=root; password=qkrwltn5130!";
+            string myconnect = "datasource = localhost; port = 3306; username=root; password=1234";
             string query = "insert into squad_library.userbookpurchase(제목,글쓴이,출판사,출판일,도서가격,배송지)" +
                 "value('" + textBox1.Text + "','" + textBox4.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox6.Text + "','" + textBox5.Text + "')";
 
@@ -52,7 +52,7 @@ namespace 스쿼드_도서관
             try
             {
 
-                MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=qkrwltn5130!");
+                MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=1234");
                 MySqlDataAdapter adapter = new MySqlDataAdapter("select 제목,글쓴이,출판사,출판일,도서가격,배송지 from squad_library.userbookpurchase", connection);
 
                 connection.Open();
@@ -72,7 +72,7 @@ namespace 스쿼드_도서관
 
         private void LoadData()
         {
-            string sql = "Server=localhost;Port=3306;username=root;password=qkrwltn5130!";
+            string sql = "Server=localhost;Port=3306;username=root;password=1234";
             MySqlConnection con = new MySqlConnection(sql);
             MySqlCommand cmd_db = new MySqlCommand("SELECT 제목,글쓴이,출판사,출판일,도서가격,배송지 FROM squad_library.userbookpurchase;", con);
 
@@ -107,7 +107,7 @@ namespace 스쿼드_도서관
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string myconnect = "datasource = localhost; port = 3306; username=root; password=qkrwltn5130!";
+            string myconnect = "datasource = localhost; port = 3306; username=root; password=1234";
             if (textBox1.Text == "")
             {
                 MessageBox.Show("항목을 찾지 못했습니다");

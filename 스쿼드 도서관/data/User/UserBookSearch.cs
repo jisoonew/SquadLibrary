@@ -114,7 +114,19 @@ namespace 스쿼드_도서관
 
         private void User_Search1_Load(object sender, EventArgs e)
         {
-            LoadData();
+            MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=1234");  //DB 주소 가져오기
+            MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 도서번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 대출여부,메모  FROM squad_library.search1", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+
+            connection.Open();  // DB 연결 시작
+
+            DataSet ds = new DataSet();  //DataSet에 데이터 넣음
+            adapter.Fill(ds, "search1");  //search1 테이블 채우기
+            dataGridView1.DataSource = ds.Tables["search1"];  // 테이블 보이기
+
+            pictureBox2.Load(@"C:\Users\pjsu2\OneDrive\바탕 화면\스쿼드 도서 이미지\서울의 맛집.jpg");
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            connection.Close();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

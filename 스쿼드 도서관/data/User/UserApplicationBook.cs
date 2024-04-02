@@ -22,7 +22,7 @@ namespace 스쿼드_도서관
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string myconnect = "datasource = localhost; port = 3306; username=root; password=qkrwltn5130!";
+            string myconnect = "datasource = localhost; port = 3306; username=root; password=1234";
             string query = "insert into squad_library.managerrequest(도서명,글쓴이,출판사,가격)" +
                 "value('" + textBox1.Text + "','" + textBox4.Text + "','" + textBox2.Text + "','" + textBox6.Text + "')";
 

@@ -57,7 +57,7 @@ namespace 스쿼드_도서관.data
             try // 대출 회원 정보 DB 연결 (bookrent_user)
             {
                 MySqlConnection conn = new MySqlConnection("datasource=localhost; port=3306; username=root; password=1234;");
-                MySqlDataAdapter adap = new MySqlDataAdapter("select 회원번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일 from visual.bookrent_user", conn);
+                MySqlDataAdapter adap = new MySqlDataAdapter("select 회원번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일 from squad_library.bookrent_user", conn);
 
                 conn.Open();
 

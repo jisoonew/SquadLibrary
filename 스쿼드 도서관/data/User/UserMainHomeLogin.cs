@@ -26,22 +26,38 @@ namespace 스쿼드_도서관
             mpg.Show();
         }
 
+        // 도서 검색 기능
         private void button4_Click(object sender, EventArgs e)
         {
             UserBookSearch us1 = new UserBookSearch();
 
+            if (this.textBox1.Text == "" && this.comboBox1.Text == "" || this.comboBox1.Text == "도서명" && this.textBox1.Text == "" || this.comboBox1.Text == "글쓴이" && this.textBox1.Text == "")
+            {
+                MessageBox.Show("입력되지 않았습니다!");
+            }
+
             if (this.comboBox1.Text == "도서명")
             {
                 MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=1234");  //DB 주소 가져오기
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 도서번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 대출여부,메모  FROM squad_library.search1 where 도서명 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 도서번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 대출여부,메모 FROM squad_library.search1 where 도서명 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
                 connection.Open();  // DB 연결 시작
 
                 DataSet ds = new DataSet();  //DataSet에 데이터 넣음
                 adapter.Fill(ds, "search1");  //search1 테이블 채우기
-                us1.dataGridView1.DataSource = ds.Tables["search1"];  // 테이블 보이기
 
-                us1.Show();
+                // 데이터가 없는 경우 처리
+                if (ds.Tables["search1"].Rows.Count == 0)
+                {
+                    MessageBox.Show("검색 결과가 없습니다."); // 콘솔에 메시지 출력
+                }
+                else
+                {
+                    us1.dataGridView1.DataSource = ds.Tables["search1"];  // 테이블 보이기
+                    us1.pictureBox2.Load(@"C:\Users\pjsu2\OneDrive\바탕 화면\스쿼드 도서 이미지\" + this.textBox1.Text + ".jpg");
+                    us1.pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+                    us1.Show();
+                }
             }
 
             else if (this.comboBox1.Text == "글쓴이")
@@ -53,9 +69,19 @@ namespace 스쿼드_도서관
 
                 DataSet ds = new DataSet();  //DataSet에 데이터 넣음
                 adapter.Fill(ds, "search1");  //search1 테이블 채우기
-                us1.dataGridView1.DataSource = ds.Tables["search1"];  // 테이블 보이기
 
-                us1.Show();
+                // 데이터가 없는 경우 처리
+                if (ds.Tables["search1"].Rows.Count == 0)
+                {
+                    MessageBox.Show("검색 결과가 없습니다."); // 콘솔에 메시지 출력
+                }
+                else
+                {
+                    us1.dataGridView1.DataSource = ds.Tables["search1"];  // 테이블 보이기
+                    us1.pictureBox2.Load(@"C:\Users\pjsu2\OneDrive\바탕 화면\스쿼드 도서 이미지\" + this.textBox1.Text + ".jpg");
+                    us1.pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+                    us1.Show();
+                }
             }
             else if (this.textBox1.Text == "" && this.comboBox1.Text == "" || this.comboBox1.Text == "도서명" && this.textBox1.Text == "" || this.comboBox1.Text == "글쓴이" && this.textBox1.Text == "")
             {

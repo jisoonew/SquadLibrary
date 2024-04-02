@@ -22,7 +22,7 @@ namespace 스쿼드_도서관
         {
             try
             {
-                MySqlConnection conn = new MySqlConnection("datasource=localhost; port=3306; username=root; password=qkrwltn5130!");
+                MySqlConnection conn = new MySqlConnection("datasource=localhost; port=3306; username=root; password=1234");
                 MySqlDataAdapter adap = new MySqlDataAdapter("select 도서명, 도서번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 대출여부,메모 from squad_library.search1", conn);
 
                 conn.Open();

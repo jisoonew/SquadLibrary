@@ -39,6 +39,7 @@ namespace 스쿼드_도서관
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(25, 40);
             this.dataGridView1.Name = "dataGridView1";
@@ -67,7 +68,7 @@ namespace 스쿼드_도서관
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
-            // user_recommend
+            // UserRecommend
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -76,7 +77,7 @@ namespace 스쿼드_도서관
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.ForeColor = System.Drawing.Color.Black;
-            this.Name = "user_recommend";
+            this.Name = "UserRecommend";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "user_recommend";
             this.Load += new System.EventHandler(this.user_recommend_Load);

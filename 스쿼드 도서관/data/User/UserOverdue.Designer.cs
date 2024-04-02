@@ -1,7 +1,7 @@
 ﻿
 namespace 스쿼드_도서관
 {
-    partial class Useroverdue
+    partial class UserOverdue
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -109,13 +109,13 @@ namespace 스쿼드_도서관
             this.label1.TabIndex = 1;
             this.label1.Text = "연체 도서 목록 DB";
             // 
-            // Useroverdue
+            // UserOverdue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.groupBox1);
-            this.Name = "Useroverdue";
+            this.Name = "UserOverdue";
             this.Size = new System.Drawing.Size(503, 432);
             this.Load += new System.EventHandler(this.Useroverdue_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
