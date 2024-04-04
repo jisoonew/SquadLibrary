@@ -68,6 +68,7 @@ namespace 스쿼드_도서관
 
         private void button2_Click(object sender, EventArgs e)
         {
+            this.Hide();
             UserJoin ul1 = new UserJoin();
             ul1.Show();
         }

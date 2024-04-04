@@ -29,43 +29,43 @@ namespace 스쿼드_도서관
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.userName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
+            this.userMan = new System.Windows.Forms.RadioButton();
+            this.checkButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.userWoman = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.userBirth = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.userPhone = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.userEmail = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.userDomain = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.userID = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.userPassword = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.userPasswordCheck = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.userRoadAddress = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.userDetailAddress = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox1
+            // userName
             // 
-            this.textBox1.Location = new System.Drawing.Point(99, 79);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(166, 21);
-            this.textBox1.TabIndex = 0;
+            this.userName.Location = new System.Drawing.Point(99, 79);
+            this.userName.Name = "userName";
+            this.userName.Size = new System.Drawing.Size(166, 21);
+            this.userName.TabIndex = 0;
             // 
             // label1
             // 
@@ -77,29 +77,29 @@ namespace 스쿼드_도서관
             this.label1.TabIndex = 1;
             this.label1.Text = "회 원 가 입";
             // 
-            // radioButton1
+            // userMan
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.radioButton1.Location = new System.Drawing.Point(290, 81);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(51, 17);
-            this.radioButton1.TabIndex = 2;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "남자";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.userMan.AutoSize = true;
+            this.userMan.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.userMan.Location = new System.Drawing.Point(290, 81);
+            this.userMan.Name = "userMan";
+            this.userMan.Size = new System.Drawing.Size(51, 17);
+            this.userMan.TabIndex = 2;
+            this.userMan.TabStop = true;
+            this.userMan.Text = "남자";
+            this.userMan.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // checkButton
             // 
-            this.button1.BackColor = System.Drawing.Color.Gainsboro;
-            this.button1.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button1.Location = new System.Drawing.Point(332, 251);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 30);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "중복확인";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.checkButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.checkButton.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.checkButton.Location = new System.Drawing.Point(332, 251);
+            this.checkButton.Name = "checkButton";
+            this.checkButton.Size = new System.Drawing.Size(75, 30);
+            this.checkButton.TabIndex = 3;
+            this.checkButton.Text = "중복확인";
+            this.checkButton.UseVisualStyleBackColor = false;
+            this.checkButton.Click += new System.EventHandler(this.CheckButton_Click);
             // 
             // label2
             // 
@@ -111,17 +111,17 @@ namespace 스쿼드_도서관
             this.label2.TabIndex = 4;
             this.label2.Text = "이름";
             // 
-            // radioButton2
+            // userWoman
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.radioButton2.Location = new System.Drawing.Point(347, 81);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(51, 17);
-            this.radioButton2.TabIndex = 5;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "여자";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.userWoman.AutoSize = true;
+            this.userWoman.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.userWoman.Location = new System.Drawing.Point(347, 81);
+            this.userWoman.Name = "userWoman";
+            this.userWoman.Size = new System.Drawing.Size(51, 17);
+            this.userWoman.TabIndex = 5;
+            this.userWoman.TabStop = true;
+            this.userWoman.Text = "여자";
+            this.userWoman.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -133,12 +133,12 @@ namespace 스쿼드_도서관
             this.label3.TabIndex = 7;
             this.label3.Text = "생년월일";
             // 
-            // textBox2
+            // userBirth
             // 
-            this.textBox2.Location = new System.Drawing.Point(99, 106);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(166, 21);
-            this.textBox2.TabIndex = 6;
+            this.userBirth.Location = new System.Drawing.Point(99, 106);
+            this.userBirth.Name = "userBirth";
+            this.userBirth.Size = new System.Drawing.Size(166, 21);
+            this.userBirth.TabIndex = 6;
             // 
             // label4
             // 
@@ -160,12 +160,12 @@ namespace 스쿼드_도서관
             this.label5.TabIndex = 10;
             this.label5.Text = "전화번호";
             // 
-            // textBox3
+            // userPhone
             // 
-            this.textBox3.Location = new System.Drawing.Point(99, 162);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(227, 21);
-            this.textBox3.TabIndex = 9;
+            this.userPhone.Location = new System.Drawing.Point(99, 162);
+            this.userPhone.Name = "userPhone";
+            this.userPhone.Size = new System.Drawing.Size(227, 21);
+            this.userPhone.TabIndex = 9;
             // 
             // label6
             // 
@@ -177,12 +177,12 @@ namespace 스쿼드_도서관
             this.label6.TabIndex = 12;
             this.label6.Text = "이메일";
             // 
-            // textBox4
+            // userEmail
             // 
-            this.textBox4.Location = new System.Drawing.Point(99, 218);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(155, 21);
-            this.textBox4.TabIndex = 11;
+            this.userEmail.Location = new System.Drawing.Point(99, 218);
+            this.userEmail.Name = "userEmail";
+            this.userEmail.Size = new System.Drawing.Size(155, 21);
+            this.userEmail.TabIndex = 11;
             // 
             // label7
             // 
@@ -194,18 +194,18 @@ namespace 스쿼드_도서관
             this.label7.TabIndex = 13;
             this.label7.Text = "@";
             // 
-            // comboBox1
+            // userDomain
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.userDomain.FormattingEnabled = true;
+            this.userDomain.Items.AddRange(new object[] {
             "naver.com",
             "gmail.com",
             "hanmail.net",
             "daum.net"});
-            this.comboBox1.Location = new System.Drawing.Point(276, 218);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(102, 20);
-            this.comboBox1.TabIndex = 14;
+            this.userDomain.Location = new System.Drawing.Point(276, 218);
+            this.userDomain.Name = "userDomain";
+            this.userDomain.Size = new System.Drawing.Size(102, 20);
+            this.userDomain.TabIndex = 14;
             // 
             // label8
             // 
@@ -217,12 +217,12 @@ namespace 스쿼드_도서관
             this.label8.TabIndex = 16;
             this.label8.Text = "아이디";
             // 
-            // textBox5
+            // userID
             // 
-            this.textBox5.Location = new System.Drawing.Point(99, 256);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(227, 21);
-            this.textBox5.TabIndex = 15;
+            this.userID.Location = new System.Drawing.Point(99, 256);
+            this.userID.Name = "userID";
+            this.userID.Size = new System.Drawing.Size(227, 21);
+            this.userID.TabIndex = 15;
             // 
             // label9
             // 
@@ -244,13 +244,13 @@ namespace 스쿼드_도서관
             this.label10.TabIndex = 19;
             this.label10.Text = "비밀번호";
             // 
-            // textBox6
+            // userPassword
             // 
-            this.textBox6.Location = new System.Drawing.Point(99, 313);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.PasswordChar = '*';
-            this.textBox6.Size = new System.Drawing.Size(227, 21);
-            this.textBox6.TabIndex = 18;
+            this.userPassword.Location = new System.Drawing.Point(99, 313);
+            this.userPassword.Name = "userPassword";
+            this.userPassword.PasswordChar = '*';
+            this.userPassword.Size = new System.Drawing.Size(227, 21);
+            this.userPassword.TabIndex = 18;
             // 
             // label11
             // 
@@ -264,11 +264,11 @@ namespace 스쿼드_도서관
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(99, 344);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.PasswordChar = '*';
-            this.textBox7.Size = new System.Drawing.Size(227, 21);
-            this.textBox7.TabIndex = 20;
+            this.userPasswordCheck.Location = new System.Drawing.Point(99, 344);
+            this.userPasswordCheck.Name = "textBox7";
+            this.userPasswordCheck.PasswordChar = '*';
+            this.userPasswordCheck.Size = new System.Drawing.Size(227, 21);
+            this.userPasswordCheck.TabIndex = 20;
             // 
             // label13
             // 
@@ -280,13 +280,13 @@ namespace 스쿼드_도서관
             this.label13.TabIndex = 24;
             this.label13.Text = "도로명 주소";
             // 
-            // textBox8
+            // userRoadAddress
             // 
-            this.textBox8.Location = new System.Drawing.Point(98, 388);
-            this.textBox8.Multiline = true;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(227, 72);
-            this.textBox8.TabIndex = 23;
+            this.userRoadAddress.Location = new System.Drawing.Point(98, 388);
+            this.userRoadAddress.Multiline = true;
+            this.userRoadAddress.Name = "userRoadAddress";
+            this.userRoadAddress.Size = new System.Drawing.Size(227, 72);
+            this.userRoadAddress.TabIndex = 23;
             // 
             // label14
             // 
@@ -298,12 +298,12 @@ namespace 스쿼드_도서관
             this.label14.TabIndex = 26;
             this.label14.Text = "상세 주소";
             // 
-            // textBox9
+            // userDetailAddress
             // 
-            this.textBox9.Location = new System.Drawing.Point(99, 469);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(227, 21);
-            this.textBox9.TabIndex = 25;
+            this.userDetailAddress.Location = new System.Drawing.Point(99, 469);
+            this.userDetailAddress.Name = "userDetailAddress";
+            this.userDetailAddress.Size = new System.Drawing.Size(227, 21);
+            this.userDetailAddress.TabIndex = 25;
             // 
             // button2
             // 
@@ -347,35 +347,34 @@ namespace 스쿼드_도서관
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.textBox9);
+            this.Controls.Add(this.userDetailAddress);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.userRoadAddress);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.userPasswordCheck);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.userPassword);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.userID);
+            this.Controls.Add(this.userDomain);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.userEmail);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.userPhone);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.userBirth);
+            this.Controls.Add(this.userWoman);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.checkButton);
+            this.Controls.Add(this.userMan);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.userName);
             this.Name = "UserJoin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User_login1";
-            this.Load += new System.EventHandler(this.User_login1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -383,34 +382,34 @@ namespace 스쿼드_도서관
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox userName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RadioButton userMan;
+        private System.Windows.Forms.Button checkButton;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton userWoman;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox userBirth;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox userPhone;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox userEmail;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox userDomain;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox userPassword;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox userPasswordCheck;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox userRoadAddress;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox userDetailAddress;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label15;
-        public System.Windows.Forms.TextBox textBox5;
+        public System.Windows.Forms.TextBox userID;
     }
 }
