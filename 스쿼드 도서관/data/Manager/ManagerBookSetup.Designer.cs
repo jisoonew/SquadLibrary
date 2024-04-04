@@ -116,7 +116,7 @@ namespace 스쿼드_도서관.data
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button1.Location = new System.Drawing.Point(155, 231);
+            this.button1.Location = new System.Drawing.Point(239, 231);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 91;
@@ -482,6 +482,8 @@ namespace 스쿼드_도서관.data
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(7, 350);
             this.dataGridView1.Name = "dataGridView1";
@@ -492,6 +494,8 @@ namespace 스쿼드_도서관.data
             // 
             // dataGridView2
             // 
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(337, 350);
             this.dataGridView2.Name = "dataGridView2";
@@ -585,7 +589,7 @@ namespace 스쿼드_도서관.data
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 21);
             this.dateTimePicker1.TabIndex = 90;
             // 
-            // booksetup
+            // ManagerBookSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -603,7 +607,7 @@ namespace 스쿼드_도서관.data
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "booksetup";
+            this.Name = "ManagerBookSetup";
             this.Size = new System.Drawing.Size(653, 542);
             this.Load += new System.EventHandler(this.booksetup_Load);
             this.groupBox1.ResumeLayout(false);

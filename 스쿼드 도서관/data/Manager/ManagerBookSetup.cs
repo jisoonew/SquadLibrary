@@ -18,18 +18,19 @@ namespace 스쿼드_도서관.data
             InitializeComponent();
         }
 
+        readonly MySqlConnection conn = new MySqlConnection("datasource=localhost; port=3306; username=root; password=1234;");
+
         private void booksetup_Load(object sender, EventArgs e)
         {
             try // 회원 정보 DB 연결
             {
-                MySqlConnection conn = new MySqlConnection("datasource=localhost; port=3306; username=root; password=1234;");
-                MySqlDataAdapter adap = new MySqlDataAdapter("select 회원번호, 회원명, 등급, 회원상태, 대출가능수, 전화번호, 주소, 메모 from squad_library.alluser", conn);
+                MySqlDataAdapter adap = new MySqlDataAdapter("select 회원번호, 회원명, 등급, 회원상태, 전화번호, 주소, 메모 from squad_library.user", conn);
 
                 conn.Open();
 
                 DataSet ds = new DataSet();
-                adap.Fill(ds, "alluser");
-                dataGridView1.DataSource = ds.Tables["alluser"];
+                adap.Fill(ds, "user");
+                dataGridView1.DataSource = ds.Tables["user"];
                 conn.Close();
             }
             catch (Exception ex)
@@ -39,7 +40,6 @@ namespace 스쿼드_도서관.data
 
             try  // 도서 정보 DB 연결
             {
-                MySqlConnection conn = new MySqlConnection("datasource=localhost; port=3306; username=root; password=1234;");
                 MySqlDataAdapter adap = new MySqlDataAdapter("select 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일, 메모 from squad_library.search1", conn);
 
                 conn.Open();
@@ -56,7 +56,6 @@ namespace 스쿼드_도서관.data
 
             try // 대출 회원 정보 DB 연결 (bookrent_user)
             {
-                MySqlConnection conn = new MySqlConnection("datasource=localhost; port=3306; username=root; password=1234;");
                 MySqlDataAdapter adap = new MySqlDataAdapter("select 회원번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일 from squad_library.bookrent_user", conn);
 
                 conn.Open();
@@ -85,10 +84,44 @@ namespace 스쿼드_도서관.data
                 textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                 comboBox3.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
                 comboBox2.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                textBox4.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                textBox3.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
-                textBox7.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                textBox8.Text = dataGridView1.Rows[e.RowIndex].Cells[7].Value.ToString();
+                textBox3.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                textBox7.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
+                textBox8.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+                using (MySqlCommand command = new MySqlCommand("select count(*) from squad_library.booksetup where 회원번호 = @회원번호", conn))
+                {
+                    command.Parameters.AddWithValue("@회원번호", textBox17.Text);
+
+                    conn.Open();
+
+                    MySqlDataReader dataReader;
+
+                    dataReader = command.ExecuteReader();
+
+                    // 회원이 대출한 도서가 있다면
+                    if (dataReader.Read())
+                    {
+                        try
+                        {
+                            // 쿼리 실행 및 결과값 받아오기
+                            int count = Convert.ToInt32(dataReader[0]);
+
+                            // 회원은 최대 5권을 대출 가능
+                            textBox4.Text = (5 - count).ToString(); // 결과값을 문자열로 변환하여 TextBox에 할당
+
+                            conn.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+
+                    }
+                    else
+                    {
+                        textBox4.Text = "0";
+                    }
+                }
+                
             }
             catch (Exception ex)
             {
@@ -118,10 +151,9 @@ namespace 스쿼드_도서관.data
             {
                 try
                 {
-                    MySqlConnection connection = new MySqlConnection("datasource=localhost; port=3306; username=root; password=1234;");  //DB 주소 가져오기
-                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 회원번호, 회원명, 등급, 회원상태, 대출가능수, 전화번호, 주소, 메모  FROM squad_library.alluser where 회원명 = '" + this.textBox11.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 회원번호, 회원명, 등급, 회원상태, 대출가능수, 전화번호, 주소, 메모  FROM squad_library.alluser where 회원명 = '" + this.textBox11.Text + "'", conn);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
-                    connection.Open();  // DB 연결 시작
+                    conn.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
                     adapter.Fill(ds, "alluser");  //search1 테이블 채우기
@@ -160,10 +192,9 @@ namespace 스쿼드_도서관.data
             {
                 try
                 {
-                    MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=1234;");  //DB 주소 가져오기
-                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일, 메모 FROM squad_library.search1 where 도서명 = '" + this.textBox12.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일, 메모 FROM squad_library.search1 where 도서명 = '" + this.textBox12.Text + "'", conn);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
-                    connection.Open();  // DB 연결 시작
+                    conn.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
                     adapter.Fill(ds, "search1");  //search1 테이블 채우기
@@ -214,10 +245,9 @@ namespace 스쿼드_도서관.data
             }
         }
 
+        // 대출하기
         private void button3_Click(object sender, EventArgs e)
         {
-            
-            MySqlConnection conn = new MySqlConnection("datasource = localhost; port = 3306; username = root; password=1234;");
             //MySqlDataReader Rd;
             conn.Open();
 
@@ -327,7 +357,6 @@ namespace 스쿼드_도서관.data
 
         void UPDATEBook1() // 도서 대출했으니까 대출 여부를 대출 중으로 바꿔주기
         {
-            MySqlConnection conn = new MySqlConnection("datasource = localhost; port = 3306; username = root; password=1234;");
             string Query = "update squad_library.search1 set 대출여부 = '대출 중'  where 도서번호=@도서번호";
             MySqlCommand cmd = new MySqlCommand(Query, conn);
             conn.Open();
@@ -348,7 +377,6 @@ namespace 스쿼드_도서관.data
 
         void UPDATEBook2() // 도서 대출했으니까 대출 여부를 대출 중으로 바꿔주기
         {
-            MySqlConnection conn = new MySqlConnection("datasource = localhost; port = 3306; username = root; password=1234;");
             string Query = "update squad_library.bookrent_user set 대출여부 = '대출 중'  where 도서번호=@도서번호";
             MySqlCommand cmd = new MySqlCommand(Query, conn);
             conn.Open();
@@ -371,16 +399,15 @@ namespace 스쿼드_도서관.data
         {
             if (textBox4.Text == "0")
             {
-                MySqlConnection con = new MySqlConnection("datasource = localhost; port = 3306; username = root; password=1234;");
                 string Query = "update squad_library.alluser set 회원상태 = '대출 불가' where 회원번호=@회원번호";
-                MySqlCommand cmd = new MySqlCommand(Query, con);
-                con.Open();
+                MySqlCommand cmd = new MySqlCommand(Query, conn);
+                conn.Open();
 
                 cmd.Parameters.AddWithValue("@회원번호", textBox17.Text);
                 cmd.Parameters.AddWithValue("대출 불가", comboBox2.Text);
 
                 cmd.ExecuteNonQuery();
-                con.Close();
+                conn.Close();
 
                 DataTable dt = new DataTable();
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
@@ -393,16 +420,15 @@ namespace 스쿼드_도서관.data
 
         void UPDATEUser2() //대출 가능 권수  -1 해야 됨
         {
-            MySqlConnection con = new MySqlConnection("datasource = localhost; port = 3306; username = root; password=1234;");
             string Query = "update squad_library.alluser set 대출가능수 = @대출가능수 - 1 where 회원번호=@회원번호";
-            MySqlCommand cmd = new MySqlCommand(Query, con);
-            con.Open();
+            MySqlCommand cmd = new MySqlCommand(Query, conn);
+            conn.Open();
 
             cmd.Parameters.AddWithValue("@회원번호", textBox17.Text);
             cmd.Parameters.AddWithValue("@대출가능수", textBox4.Text);
 
             cmd.ExecuteNonQuery();
-            con.Close();
+            conn.Close();
 
             DataTable dt = new DataTable();
             MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
@@ -412,7 +438,6 @@ namespace 스쿼드_도서관.data
 
         public void LoadData1()
         {
-            MySqlConnection conn = new MySqlConnection("datasource = localhost; port = 3306; username = root; password=1234;");
             MySqlDataAdapter adap = new MySqlDataAdapter("select * from squad.alluser", conn);
             MySqlCommand cmd = new MySqlCommand("SELECT 회원번호, 회원명, 등급, 회원상태, 대출가능수, 전화번호, 주소, 메모 FROM squad_library.alluser;", conn);
 
@@ -459,7 +484,7 @@ namespace 스쿼드_도서관.data
         private void button1_Click(object sender, EventArgs e)
         {
             MySqlConnection conn = new MySqlConnection("datasource = localhost; port = 3306; username = root; password=1234; Convert Zero Datetime = true ;");
-            string Query = "update squad_library.alluser set 회원명=@회원명, 등급=@등급, 회원상태=@회원상태, 대출가능수=@대출가능수, 전화번호=@전화번호, 주소=@주소, 메모=@메모 where 회원번호=@회원번호";
+            string Query = "update squad_library.user set 회원명=@회원명, 등급=@등급, 회원상태=@회원상태, 대출가능수=@대출가능수, 전화번호=@전화번호, 주소=@주소, 메모=@메모 where 회원번호=@회원번호";
             MySqlCommand cmd = new MySqlCommand(Query, conn);
             conn.Open();
 

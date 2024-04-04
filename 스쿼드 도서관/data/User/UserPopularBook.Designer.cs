@@ -67,7 +67,7 @@ namespace 스쿼드_도서관
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
-            // userbook3
+            // UserPopularBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -75,7 +75,7 @@ namespace 스쿼드_도서관
             this.ClientSize = new System.Drawing.Size(513, 450);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
-            this.Name = "userbook3";
+            this.Name = "UserPopularBook";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "userbook3";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

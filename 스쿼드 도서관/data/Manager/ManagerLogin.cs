@@ -70,12 +70,14 @@ namespace 스쿼드_도서관
                 else if (count == 1)
                 {
                     MessageBox.Show("관리자로 로그인 되었습니다.");
+                    this.Hide();
                     mH.Show();
                 }
 
                 else if (count2 == 1)
                 {
                     MessageBox.Show("알바생 로그인 되었습니다.");
+                    this.Hide();
                     mH0.Show();
                 }
 

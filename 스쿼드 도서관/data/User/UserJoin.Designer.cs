@@ -93,9 +93,9 @@ namespace 스쿼드_도서관
             // 
             this.checkButton.BackColor = System.Drawing.Color.Gainsboro;
             this.checkButton.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.checkButton.Location = new System.Drawing.Point(332, 251);
+            this.checkButton.Location = new System.Drawing.Point(332, 256);
             this.checkButton.Name = "checkButton";
-            this.checkButton.Size = new System.Drawing.Size(75, 30);
+            this.checkButton.Size = new System.Drawing.Size(75, 21);
             this.checkButton.TabIndex = 3;
             this.checkButton.Text = "중복확인";
             this.checkButton.UseVisualStyleBackColor = false;
@@ -181,14 +181,14 @@ namespace 스쿼드_도서관
             // 
             this.userEmail.Location = new System.Drawing.Point(99, 218);
             this.userEmail.Name = "userEmail";
-            this.userEmail.Size = new System.Drawing.Size(155, 21);
+            this.userEmail.Size = new System.Drawing.Size(123, 21);
             this.userEmail.TabIndex = 11;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label7.Location = new System.Drawing.Point(256, 223);
+            this.label7.Location = new System.Drawing.Point(224, 223);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(17, 12);
             this.label7.TabIndex = 13;
@@ -202,9 +202,9 @@ namespace 스쿼드_도서관
             "gmail.com",
             "hanmail.net",
             "daum.net"});
-            this.userDomain.Location = new System.Drawing.Point(276, 218);
+            this.userDomain.Location = new System.Drawing.Point(244, 218);
             this.userDomain.Name = "userDomain";
-            this.userDomain.Size = new System.Drawing.Size(102, 20);
+            this.userDomain.Size = new System.Drawing.Size(82, 20);
             this.userDomain.TabIndex = 14;
             // 
             // label8
@@ -262,10 +262,10 @@ namespace 스쿼드_도서관
             this.label11.TabIndex = 21;
             this.label11.Text = "비밀번호 확인";
             // 
-            // textBox7
+            // userPasswordCheck
             // 
             this.userPasswordCheck.Location = new System.Drawing.Point(99, 344);
-            this.userPasswordCheck.Name = "textBox7";
+            this.userPasswordCheck.Name = "userPasswordCheck";
             this.userPasswordCheck.PasswordChar = '*';
             this.userPasswordCheck.Size = new System.Drawing.Size(227, 21);
             this.userPasswordCheck.TabIndex = 20;
@@ -308,9 +308,9 @@ namespace 스쿼드_도서관
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button2.Location = new System.Drawing.Point(332, 340);
+            this.button2.Location = new System.Drawing.Point(332, 344);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 30);
+            this.button2.Size = new System.Drawing.Size(75, 21);
             this.button2.TabIndex = 27;
             this.button2.Text = "확인";
             this.button2.UseVisualStyleBackColor = true;

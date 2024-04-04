@@ -54,9 +54,9 @@ namespace 스쿼드_도서관
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("굴림", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button1.Location = new System.Drawing.Point(357, 226);
+            this.button1.Location = new System.Drawing.Point(357, 230);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 33);
+            this.button1.Size = new System.Drawing.Size(75, 25);
             this.button1.TabIndex = 4;
             this.button1.Text = "확인";
             this.button1.UseVisualStyleBackColor = true;
