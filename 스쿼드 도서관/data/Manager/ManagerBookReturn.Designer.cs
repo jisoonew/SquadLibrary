@@ -110,6 +110,7 @@ namespace 스쿼드_도서관.data
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.Size = new System.Drawing.Size(316, 165);
             this.dataGridView2.TabIndex = 32;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             // 
             // dataGridView1
             // 
@@ -535,7 +536,7 @@ namespace 스쿼드_도서관.data
             this.label4.Size = new System.Drawing.Size(0, 12);
             this.label4.TabIndex = 56;
             // 
-            // bookreturn
+            // ManagerBookReturn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -550,7 +551,7 @@ namespace 스쿼드_도서관.data
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "bookreturn";
+            this.Name = "ManagerBookReturn";
             this.Size = new System.Drawing.Size(653, 542);
             this.Load += new System.EventHandler(this.bookreturn_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();

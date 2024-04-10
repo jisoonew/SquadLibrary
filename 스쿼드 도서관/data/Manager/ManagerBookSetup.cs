@@ -54,20 +54,6 @@ namespace 스쿼드_도서관.data
                 MessageBox.Show(ex.Message);
             }
 
-            try // 대출 회원 정보 DB 연결 (bookrent_user)
-            {
-                MySqlDataAdapter adap = new MySqlDataAdapter("select 회원번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일 from squad_library.bookrent_user", conn);
-
-                conn.Open();
-
-                DataSet ds = new DataSet();
-                adap.Fill(ds, "bookrent_user");
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
             ManagerBookReturn br = new ManagerBookReturn();
             dateTimePicker1.Format = DateTimePickerFormat.Long;
             dateTimePicker1.Value = DateTime.Now.AddDays(14);
@@ -248,8 +234,6 @@ namespace 스쿼드_도서관.data
         // 대출하기
         private void button3_Click(object sender, EventArgs e)
         {
-            //MySqlDataReader Rd;
-            conn.Open();
 
             if (textBox4.Text == "0")
             {
@@ -282,36 +266,77 @@ namespace 스쿼드_도서관.data
             }
             else //(cmd.ExecuteNonQuery() == 1)
                 {
-                // 도서 대출하면 대출 회원 테이블에 새로 데이터 저장되는거
-                UPDATEBook1();
-                UPDATEBook2();
-                //UPDATEUser2();
-                UPDATEUser1();
-                INSERTBookRent();
+                try
+                {
+                    string connectionString = "datasource=localhost;port=3306;username=root;password=1234;Convert Zero Datetime=true";
 
-                MessageBox.Show("도서가 대출되었습니다.");
-                textBox17.Text = ""; // 회원 번호
-                textBox1.Text = ""; // 회원명
-                comboBox3.Text = ""; // 등급
-                comboBox2.Text = ""; // 회원 상태
-                textBox4.Text = ""; // 대출 가능
-                textBox3.Text = ""; // 전화번호
-                textBox7.Text = ""; // 주소
-                textBox8.Text = ""; // 메모
+                    using (MySqlConnection conn = new MySqlConnection(connectionString))
+                    {
+                        conn.Open();
 
-                textBox13.Text = ""; // 도서 번호
-                textBox14.Text = ""; // 도서명
-                textBox5.Text = ""; // 글쓴이
-                textBox16.Text = ""; // 출판사
-                comboBox4.Text = ""; // 도서 상태
-                comboBox5.Text = ""; // 대출 여부
-                textBox10.Text = ""; // 대출일 
-                textBox9.Text = ""; // 반납일
-                textBox15.Text = ""; // 메모
-                LoadData1();
-                LoadData2();
+                        // 도서 대출 여부 업데이트
+                        string updateQuery = "UPDATE squad_library.search1 SET 대출여부 = '대출 중' WHERE 도서번호 = @도서번호";
+                        MySqlCommand updateCmd = new MySqlCommand(updateQuery, conn);
+                        updateCmd.Parameters.AddWithValue("@도서번호", textBox13.Text);
+
+                        updateCmd.ExecuteNonQuery();
+
+                        // 대출 중인 도서를 대출 회원 테이블에 추가
+                        string insertQuery = "INSERT INTO squad_library.bookrent (회원번호, 도서번호, 대출여부, 대출일, 반납일, 메모) " +
+                                             "VALUES (@회원번호, @도서번호, @대출여부, @대출일, @반납일, @메모)";
+
+                        MySqlCommand insertCmd = new MySqlCommand(insertQuery, conn);
+                        insertCmd.Parameters.AddWithValue("@회원번호", textBox17.Text);
+                        insertCmd.Parameters.AddWithValue("@도서번호", textBox13.Text);
+                        insertCmd.Parameters.AddWithValue("@대출여부", comboBox5.Text);
+                        insertCmd.Parameters.AddWithValue("@대출일", textBox10.Text);
+                        insertCmd.Parameters.AddWithValue("@반납일", textBox9.Text);
+                        insertCmd.Parameters.AddWithValue("@메모", textBox15.Text);
+
+                        insertCmd.ExecuteNonQuery();
+
+                        conn.Close();
+
+                        MessageBox.Show("도서가 대출되었습니다.");
+
+                        // 입력 필드 초기화
+                        ClearInputFields();
+
+                        // 데이터 다시 로드
+                        LoadData1();
+                        LoadData2();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("오류가 발생했습니다: " + ex.Message);
+                }
+
+                
             }
 
+        }
+
+        // 입력 필드 초기화 메서드
+        private void ClearInputFields()
+        {
+            textBox17.Text = "";
+            textBox1.Text = "";
+            comboBox3.SelectedIndex = -1;
+            comboBox2.SelectedIndex = -1;
+            textBox4.Text = "";
+            textBox3.Text = "";
+            textBox7.Text = "";
+            textBox8.Text = "";
+            textBox13.Text = "";
+            textBox14.Text = "";
+            textBox5.Text = "";
+            textBox16.Text = "";
+            comboBox4.SelectedIndex = -1;
+            comboBox5.SelectedIndex = -1;
+            textBox10.Text = "";
+            textBox9.Text = "";
+            textBox15.Text = "";
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -333,6 +358,7 @@ namespace 스쿼드_도서관.data
 
         void INSERTBookRent() // 대출 회원 정보 저장
         {
+            // 테이블에 회원번호가 있으면 삽입되지 않음
             MySqlConnection conn = new MySqlConnection("datasource = localhost; port = 3306; username = root; password=1234; Convert Zero Datetime = true");
             //MySqlDataReader Rd;
             conn.Open();
@@ -439,7 +465,7 @@ namespace 스쿼드_도서관.data
         public void LoadData1()
         {
             MySqlDataAdapter adap = new MySqlDataAdapter("select * from squad.alluser", conn);
-            MySqlCommand cmd = new MySqlCommand("SELECT 회원번호, 회원명, 등급, 회원상태, 대출가능수, 전화번호, 주소, 메모 FROM squad_library.alluser;", conn);
+            MySqlCommand cmd = new MySqlCommand("SELECT 회원번호, 회원명, 등급, 회원상태, 대출가능수, 전화번호, 주소, 메모 FROM squad_library.user;", conn);
 
             try
             {
