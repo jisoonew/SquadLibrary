@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace 스쿼드_도서관.data
         }
 
         readonly MySqlConnection conn = new MySqlConnection("datasource=localhost; port=3306; username=root; password=1234;");
+        string connSelect = "datasource = localhost; port = 3306; username = root; password=1234";
 
         private void booksetup_Load(object sender, EventArgs e)
         {
@@ -40,13 +42,14 @@ namespace 스쿼드_도서관.data
 
             try  // 도서 정보 DB 연결
             {
-                MySqlDataAdapter adap = new MySqlDataAdapter("select 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일, 메모 from squad_library.search1", conn);
+                MySqlDataAdapter adap = new MySqlDataAdapter("select 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출일, 반납일, 메모 from squad_library.search1", conn);
 
                 conn.Open();
 
                 DataSet ds = new DataSet();
                 adap.Fill(ds, "booksetup");
                 dataGridView2.DataSource = ds.Tables["booksetup"];
+
                 conn.Close();
             }
             catch (Exception ex)
@@ -62,6 +65,7 @@ namespace 스쿼드_도서관.data
             dateTimePicker1.Value = DateTime.Now;
         }
 
+        // 회원 목록
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -73,45 +77,55 @@ namespace 스쿼드_도서관.data
                 textBox3.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
                 textBox7.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString();
                 textBox8.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
-                using (MySqlCommand command = new MySqlCommand("select count(*) from squad_library.booksetup where 회원번호 = @회원번호", conn))
+
+                // MySqlCommand : MySQL 데이터베이스로 쿼리를 보내고 데이터를 검색, 삽입, 갱신 또는 삭제할 수 있습니다.
+                using (MySqlCommand command = new MySqlCommand("select count(*) from squad_library.bookrent where 회원번호 = @회원번호", conn))
                 {
                     command.Parameters.AddWithValue("@회원번호", textBox17.Text);
 
                     conn.Open();
 
-                    MySqlDataReader dataReader;
-
-                    dataReader = command.ExecuteReader();
-
-                    // 회원이 대출한 도서가 있다면
-                    if (dataReader.Read())
+                    using (MySqlDataReader dataReader = command.ExecuteReader())
                     {
-                        try
+
+                        // 회원이 대출한 도서가 있다면
+                        if (dataReader.Read())
                         {
-                            // 쿼리 실행 및 결과값 받아오기
-                            int count = Convert.ToInt32(dataReader[0]);
+                            try
+                            {
+                                // 쿼리 실행 및 결과값 받아오기
+                                int count = Convert.ToInt32(dataReader[0]);
 
-                            // 회원은 최대 5권을 대출 가능
-                            textBox4.Text = (5 - count).ToString(); // 결과값을 문자열로 변환하여 TextBox에 할당
+                                // 회원은 최대 5권을 대출 가능
+                                textBox4.Text = (5 - count).ToString(); // 결과값을 문자열로 변환하여 TextBox에 할당
 
-                            conn.Close();
+                                conn.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            MessageBox.Show(ex.Message);
+                            textBox4.Text = "0";
                         }
-
-                    }
-                    else
-                    {
-                        textBox4.Text = "0";
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                // 연결 닫기
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -131,42 +145,84 @@ namespace 스쿼드_도서관.data
             LoadData1();
         }
 
+        // 검색 기능
         private void button4_Click(object sender, EventArgs e)
         {
             if (comboBox6.Text == "회원명")
             {
                 try
                 {
-                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 회원번호, 회원명, 등급, 회원상태, 대출가능수, 전화번호, 주소, 메모  FROM squad_library.alluser where 회원명 = '" + this.textBox11.Text + "'", conn);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                    // MySqlDataAdapter는 데이터베이스와 데이터를 주고받을 때 사용되는 클래스 중 하나이다.
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 회원번호, 회원명, 등급, 회원상태, 전화번호, 주소, 메모  FROM squad_library.user where 회원명 = '" + this.textBox11.Text + "'", conn))
+                    {
+                        conn.Open();  // DB 연결 시작
 
-                    conn.Open();  // DB 연결 시작
+                        DataSet ds = new DataSet();  //DataSet에 데이터 넣음
+                        adapter.Fill(ds, "user");  //search1 테이블 채우기
+                        dataGridView1.DataSource = ds.Tables["user"];  // 테이블 보이기
 
-                    DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "alluser");  //search1 테이블 채우기
-                    dataGridView1.DataSource = ds.Tables["alluser"];  // 테이블 보이기
+                    } // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
+                finally
+                {
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                }
             }
         }
 
+        // 도서 목록
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                textBox13.Text = dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString();
-                textBox14.Text = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();
-                textBox5.Text = dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString();
-                textBox16.Text = dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString();
-                comboBox4.Text = dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString();
-                comboBox5.Text = dataGridView2.Rows[e.RowIndex].Cells[5].Value.ToString();
-                textBox15.Text = dataGridView2.Rows[e.RowIndex].Cells[7].Value.ToString();
+                textBox13.Text = dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString(); // 도서 번호
+                textBox14.Text = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString(); // 도서명
+                textBox5.Text = dataGridView2.Rows[e.RowIndex].Cells[2].Value.ToString(); // 글쓴이
+                textBox16.Text = dataGridView2.Rows[e.RowIndex].Cells[3].Value.ToString(); // 출판사
+                comboBox4.Text = dataGridView2.Rows[e.RowIndex].Cells[4].Value.ToString(); // 도서 상태
+                textBox15.Text = dataGridView2.Rows[e.RowIndex].Cells[7].Value.ToString(); // 메모
+
+                // MySqlDataAdapter는 데이터베이스와 데이터를 주고받을 때 사용되는 클래스 중 하나이다.
+                using (MySqlCommand sqlCommand = new MySqlCommand("SELECT count(*)  FROM squad_library.bookrent where 도서번호 = '" + this.textBox13.Text + "'", conn))
+                {
+                    conn.Open();  // DB 연결 시작
+
+                    using (MySqlDataReader dataReader = sqlCommand.ExecuteReader()) {
+
+                        if (dataReader.Read()) {
+
+                            int rentCount = Convert.ToInt32(dataReader[0]);
+
+                            // 해당 도서가 대출 중이라면...
+                            if(rentCount == 1)
+                            {
+                                comboBox5.Text = "대출 중"; // 대출 여부
+                            } else
+                            {
+                                comboBox5.Text = "대출 가능"; // 대출 여부
+                            }
+                        }
+                        
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if(conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -265,7 +321,7 @@ namespace 스쿼드_도서관.data
                 MessageBox.Show("연체 도서는 대출할 수 없습니다.");
             }
             else //(cmd.ExecuteNonQuery() == 1)
-                {
+            {
                 try
                 {
                     string connectionString = "datasource=localhost;port=3306;username=root;password=1234;Convert Zero Datetime=true";
@@ -312,7 +368,7 @@ namespace 스쿼드_도서관.data
                     MessageBox.Show("오류가 발생했습니다: " + ex.Message);
                 }
 
-                
+
             }
 
         }
@@ -464,19 +520,22 @@ namespace 스쿼드_도서관.data
 
         public void LoadData1()
         {
-            MySqlDataAdapter adap = new MySqlDataAdapter("select * from squad.alluser", conn);
-            MySqlCommand cmd = new MySqlCommand("SELECT 회원번호, 회원명, 등급, 회원상태, 대출가능수, 전화번호, 주소, 메모 FROM squad_library.user;", conn);
+            MySqlDataAdapter adap = new MySqlDataAdapter("select * from squad.user", conn);
+            MySqlCommand cmd = new MySqlCommand("SELECT 회원번호, 회원명, 등급, 회원상태, 전화번호, 주소, 메모 FROM squad_library.user;", conn);
 
             try
             {
-                adap.SelectCommand = cmd;
-                DataTable datatable = new DataTable();
-                adap.Fill(datatable);
-                BindingSource bSource = new BindingSource();
+                using (MySqlConnection conn = new MySqlConnection(connSelect))
+                {
+                    adap.SelectCommand = cmd;
+                    DataTable datatable = new DataTable();
+                    adap.Fill(datatable);
+                    BindingSource bSource = new BindingSource();
 
-                bSource.DataSource = datatable;
-                dataGridView1.DataSource = bSource;
-                adap.Update(datatable);
+                    bSource.DataSource = datatable;
+                    dataGridView1.DataSource = bSource;
+                    adap.Update(datatable);
+                }
             }
             catch (Exception ex)
             {
