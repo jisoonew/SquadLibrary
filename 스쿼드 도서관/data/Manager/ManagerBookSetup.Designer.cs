@@ -235,11 +235,11 @@ namespace 스쿼드_도서관.data
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(135, 63);
+            this.label6.Location = new System.Drawing.Point(149, 63);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 12);
+            this.label6.Size = new System.Drawing.Size(57, 12);
             this.label6.TabIndex = 7;
-            this.label6.Text = "대출 가능권 수";
+            this.label6.Text = "대출 가능";
             // 
             // textBox4
             // 
@@ -546,7 +546,9 @@ namespace 스쿼드_도서관.data
             // 
             this.comboBox6.FormattingEnabled = true;
             this.comboBox6.Items.AddRange(new object[] {
-            "회원명"});
+            "회원명",
+            "회원번호",
+            "등급"});
             this.comboBox6.Location = new System.Drawing.Point(16, 35);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(71, 20);

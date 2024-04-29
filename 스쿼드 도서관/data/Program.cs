@@ -16,7 +16,7 @@ namespace 스쿼드_도서관
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ManagerLogin());
+            Application.Run(new ManagerMainHome());
         }
     }
 }
