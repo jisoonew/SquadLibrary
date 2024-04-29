@@ -104,6 +104,7 @@ namespace 스쿼드_도서관.data
             }
         }
 
+        // 회원 목록
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string query = "SELECT s.도서번호, s.도서명, s.글쓴이, s.출판사, s.도서상태, br.대출여부, br.대출일, br.반납일, br.메모 " +
