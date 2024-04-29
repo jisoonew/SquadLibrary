@@ -151,11 +151,11 @@ namespace 스쿼드_도서관.data
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(148, 256);
+            this.button1.Location = new System.Drawing.Point(232, 256);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 56;
-            this.button1.Text = "확인";
+            this.button1.Text = "수정";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -181,7 +181,7 @@ namespace 스쿼드_도서관.data
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(146, 107);
+            this.label19.Location = new System.Drawing.Point(148, 107);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(53, 12);
             this.label19.TabIndex = 33;
@@ -260,7 +260,7 @@ namespace 스쿼드_도서관.data
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(153, 43);
+            this.label7.Location = new System.Drawing.Point(151, 43);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 9;

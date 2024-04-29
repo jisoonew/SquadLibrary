@@ -112,7 +112,8 @@ namespace 스쿼드_도서관
 
         private void manager_Hompage2_Load(object sender, EventArgs e)
         {
-
+            ManagerBookSetup managerSetUp = new ManagerBookSetup();
+            mainPanel(managerSetUp);
         }
 
         private void 구매도서ToolStripMenuItem_Click(object sender, EventArgs e)
