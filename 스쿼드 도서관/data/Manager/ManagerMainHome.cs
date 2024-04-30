@@ -110,9 +110,11 @@ namespace 스쿼드_도서관
 
         }
 
+        // 대출 페이지
         private void manager_Hompage2_Load(object sender, EventArgs e)
         {
-
+            ManagerBookSetup managerSetUp = new ManagerBookSetup();
+            mainPanel(managerSetUp);
         }
 
         private void 구매도서ToolStripMenuItem_Click(object sender, EventArgs e)

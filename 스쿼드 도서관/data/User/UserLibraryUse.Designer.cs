@@ -78,7 +78,7 @@ namespace 스쿼드_도서관
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(452, 22);
             this.textBox4.TabIndex = 23;
-            this.textBox4.Text = "빌려간 도서 기일 내에 반납하지 않을 시 -> 3일에 1000원";
+            this.textBox4.Text = "빌려간 도서 기일 내에 반납하지 않을 시 -> 1일에 1000원";
             // 
             // textBox3
             // 
@@ -129,7 +129,7 @@ namespace 스쿼드_도서관
             this.label1.TabIndex = 18;
             this.label1.Text = "대출 가능 권수 / 기간";
             // 
-            // userlibraryuse02
+            // UserLibraryUse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -144,7 +144,7 @@ namespace 스쿼드_도서관
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "userlibraryuse02";
+            this.Name = "UserLibraryUse";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "userlibraryuse02";
             this.ResumeLayout(false);

@@ -58,7 +58,7 @@ namespace 스쿼드_도서관.data
         }
 
         // 회원 정보 출력
-        public void LoadData1()
+        public void LoadUserData()
         {
             try
             {
@@ -87,23 +87,35 @@ namespace 스쿼드_도서관.data
 
         public void LoadData2()
         {
-            MySqlDataAdapter adap = new MySqlDataAdapter("select 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일, 도서정보메모 from squad_library.bookrent_user", conn);
-            MySqlCommand cmd = new MySqlCommand("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일, 도서정보메모 from squad_library.bookrent_user;", conn);
+            
+            MySqlCommand cmd = new MySqlCommand("select br.도서번호, s.도서명, s.글쓴이, s.출판사, s.도서상태, br.대출일, br.반납일, br.메모 from squad_library.search1 s inner join squad_library.bookrent br on s.도서번호 = br.도서번호;", conn);
 
             try
             {
-                adap.SelectCommand = cmd;
-                DataTable datatable = new DataTable();
-                adap.Fill(datatable);
-                BindingSource bSource = new BindingSource();
+                using (MySqlDataAdapter adap = new MySqlDataAdapter("select br.도서번호, s.도서명, s.글쓴이, s.출판사, s.도서상태, br.대출일, br.반납일, br.메모 from squad_library.search1 s inner join squad_library.bookrent br on s.도서번호 = br.도서번호;", conn)) {
+                    
+                    conn.Open();
 
-                bSource.DataSource = datatable;
-                dataGridView2.DataSource = bSource;
-                adap.Update(datatable);
+                    adap.SelectCommand = cmd;
+                    DataTable datatable = new DataTable();
+                    adap.Fill(datatable);
+                    BindingSource bSource = new BindingSource();
+
+                    bSource.DataSource = datatable;
+                    dataGridView2.DataSource = bSource;
+                    adap.Update(datatable);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if(conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
             }
         }
 
@@ -216,9 +228,9 @@ namespace 스쿼드_도서관.data
             }
         }
 
+        // 반납 기능
         private void button3_Click(object sender, EventArgs e)
         {
-            string constring = "datasource=localhost; port=3306; username=root; password=1234";
             if (textBox14.Text == "")
             {
                 MessageBox.Show("반납 할 도서 정보가 없습니다.");
@@ -227,23 +239,17 @@ namespace 스쿼드_도서관.data
             else
             {
                 //delete를 통해 DB로 삭제된 데이터 전송 - 기본키 기준으로 삭제위치 탐색
-                string Query = "delete from squad_library.bookrent_user where 도서번호 ='" + this.textBox13.Text + "';";
-                MySqlConnection conDataBase = new MySqlConnection(constring);
-                MySqlCommand cmdDatabase = new MySqlCommand(Query, conDataBase);
-                MySqlDataReader myReader;
+                string Query = "delete from squad_library.bookrent where 도서번호 ='" + this.textBox13.Text + "';";
+                MySqlCommand cmdDatabase = new MySqlCommand(Query, conn);
+                MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmdDatabase);
 
                 try
                 {
-                    conDataBase.Open();
-                    myReader = cmdDatabase.ExecuteReader();
+                    conn.Open();
+                    DataTable deleteData = new DataTable();
+                    mySqlDataAdapter.Fill(deleteData);
+                    mySqlDataAdapter.Update(deleteData);
                     MessageBox.Show("도서가 반납되었습니다.");
-
-                    while (myReader.Read())
-                    {
-                        UPDATEBook();
-                        UPDATEUser2();
-                        UPDATEUSER();
-                    }
                 }
 
                 catch (Exception ex)
@@ -251,28 +257,9 @@ namespace 스쿼드_도서관.data
                     MessageBox.Show(ex.Message);
                 }
 
-                LoadData1();
+                LoadUserData();
                 LoadData2();
             }
-        }
-
-        void UPDATEBook() // 도서 반납했으니까 대출 여부를 대출 가능으로 바꿔주기
-        {
-            MySqlConnection conn = new MySqlConnection("datasource = localhost; port = 3306; username = root; password=1234");
-            string Query = "update squad_library.search1 set 대출여부 = '대출 가능' where 도서번호=@도서번호";
-            MySqlCommand cmd = new MySqlCommand(Query, conn);
-            conn.Open();
-
-            cmd.Parameters.AddWithValue("@도서번호", textBox13.Text);
-            cmd.Parameters.AddWithValue("대출 가능", comboBox5.Text);
-
-            cmd.ExecuteNonQuery();
-            conn.Close();
-
-            DataTable datatable = new DataTable();
-            MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
-            adap.Fill(datatable);
-            dataGridView2.DataSource = datatable;
         }
 
         void UPDATEUSER() // 대출 불가일때 반납이 처리되면 대출 가능으로 바꿔주기
@@ -294,25 +281,6 @@ namespace 스쿼드_도서관.data
                 MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
                 adap.Fill(datatable);
             }
-        }
-
-        void UPDATEUser2() //대출 가능 권수 +1 해야 됨
-        {
-            MySqlConnection con = new MySqlConnection("datasource = localhost; port = 3306; username = root; password=1234");
-            string Query = "update squad_library.alluser set 대출가능수 = @대출가능수 + 1 where 회원번호=@회원번호";
-            MySqlCommand cmd = new MySqlCommand(Query, con);
-            con.Open();
-
-            cmd.Parameters.AddWithValue("@회원번호", textBox17.Text);
-            cmd.Parameters.AddWithValue("@대출가능수", textBox4.Text);
-
-            cmd.ExecuteNonQuery();
-            con.Close();
-
-            DataTable dt = new DataTable();
-            MySqlDataAdapter adap = new MySqlDataAdapter(cmd);
-            adap.Fill(dt);
-            dataGridView1.DataSource = dt;
         }
 
         // 회원 정보 수정
@@ -340,7 +308,7 @@ namespace 스쿼드_도서관.data
                 adap.Fill(datatable);
                 adap.Update(datatable);
 
-                LoadData1();
+                LoadUserData();
             }
             catch (Exception ex)
             {
@@ -457,7 +425,7 @@ namespace 스쿼드_도서관.data
             textBox9.Text = "";
             textBox15.Text = "";
 
-            LoadData1();
+            LoadUserData();
             LoadData2();
         }
     }

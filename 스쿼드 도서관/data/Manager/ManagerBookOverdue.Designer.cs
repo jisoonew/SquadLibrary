@@ -115,6 +115,7 @@ namespace 스쿼드_도서관.data
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.Size = new System.Drawing.Size(318, 159);
             this.dataGridView2.TabIndex = 38;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             // 
             // dataGridView1
             // 
@@ -375,6 +376,7 @@ namespace 스쿼드_도서관.data
             this.button3.TabIndex = 30;
             this.button3.Text = "반납";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // groupBox1
             // 
@@ -401,7 +403,6 @@ namespace 스쿼드_도서관.data
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "회원 정보";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // label24
             // 
@@ -427,7 +428,6 @@ namespace 스쿼드_도서관.data
             this.label19.Size = new System.Drawing.Size(53, 12);
             this.label19.TabIndex = 54;
             this.label19.Text = "전화번호";
-            this.label19.Click += new System.EventHandler(this.label19_Click);
             // 
             // textBox3
             // 
@@ -567,6 +567,7 @@ namespace 스쿼드_도서관.data
             this.button6.TabIndex = 48;
             this.button6.Text = "검색";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // comboBox6
             // 

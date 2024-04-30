@@ -390,15 +390,6 @@ namespace 스쿼드_도서관.data
                     {
                         conn.Open();
 
-                        // 도서 대출 여부 업데이트
-                        string updateQuery = "UPDATE squad_library.search1 SET 대출여부 = '대출 중' WHERE 도서번호 = @도서번호";
-
-                        MySqlCommand updateCmd = new MySqlCommand(updateQuery, conn);
-
-                        updateCmd.Parameters.AddWithValue("@도서번호", textBox13.Text);
-
-                        updateCmd.ExecuteNonQuery();
-
                         // 대출 중인 도서를 대출 회원 테이블에 추가
                         string insertQuery = "INSERT INTO squad_library.bookrent (회원번호, 도서번호, 대출일, 반납일, 메모) " +
                                              "VALUES (@회원번호, @도서번호, @대출일, @반납일, @메모)";
@@ -444,7 +435,7 @@ namespace 스쿼드_도서관.data
         {
             textBox17.Text = "";
             textBox1.Text = "";
-            comboBox3.SelectedIndex = -1;
+            comboBox3.Text = "";
             comboBox2.SelectedIndex = -1;
             textBox4.Text = "";
             textBox3.Text = "";
@@ -454,7 +445,7 @@ namespace 스쿼드_도서관.data
             textBox14.Text = "";
             textBox5.Text = "";
             textBox16.Text = "";
-            comboBox4.SelectedIndex = -1;
+            comboBox4.Text = "";
             comboBox5.SelectedIndex = -1;
             textBox10.Text = "";
             textBox9.Text = "";
@@ -612,8 +603,8 @@ namespace 스쿼드_도서관.data
         public void LoadData2()
         {
             MySqlConnection conn = new MySqlConnection("datasource = localhost; port = 3306; username = root; password=1234; Convert zero Datetime = true ;");
-            MySqlDataAdapter adap = new MySqlDataAdapter("select 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일, 메모 from squad_library.search1", conn);
-            MySqlCommand cmd = new MySqlCommand("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일, 메모 FROM squad_library.search1;", conn);
+            MySqlDataAdapter adap = new MySqlDataAdapter("select 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출일, 반납일, 메모 from squad_library.search1", conn);
+            MySqlCommand cmd = new MySqlCommand("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출일, 반납일, 메모 FROM squad_library.search1;", conn);
 
             try
             {
