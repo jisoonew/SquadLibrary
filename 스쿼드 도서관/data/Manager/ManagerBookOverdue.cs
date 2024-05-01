@@ -109,14 +109,14 @@ namespace 스쿼드_도서관.data
             {
                 MessageBox.Show("도서정보 DB 연결에 실패하였습니다.");
             }
-            }
+        }
 
 
-        
-private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
-            {   
+            {
                 MySqlDataAdapter userAdap = new MySqlDataAdapter("select user.회원번호, user.회원명, user.등급, user.회원상태, user.전화번호, user.주소, user.메모 from squad_library.bookrent rent join squad_library.user user on rent.회원번호 = user.회원번호 WHERE date(rent.반납일) < date(now());", conn);
 
                 DataSet userDs = new DataSet();
@@ -173,7 +173,7 @@ private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
             }
             finally
             {
-                if(conn.State == ConnectionState.Open)
+                if (conn.State == ConnectionState.Open)
                 {
                     conn.Close();
                 }
@@ -205,7 +205,7 @@ private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
                         TimeSpan difference = returnDate - loanDate;
                         int differenceInDays = (returnDate - loanDate).Days * 1000;
                         textBox18.Text = difference.Days.ToString(); // 대출일
-                        textBox17.Text = differenceInDays+"원";
+                        textBox17.Text = differenceInDays + "원";
                     }
                 }
             }
@@ -241,7 +241,45 @@ private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         // 반납
         private void button3_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (MessageBox.Show("도서 \"" + textBox14.Text + "\"를 반납 하시겠습니까?", "연체", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    conn.Open();
+                    MySqlCommand overdueCommand = new MySqlCommand("delete from squad_library.bookrent where 도서번호 = '" + textBox13.Text + "'", conn);
+                    MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(overdueCommand);
+                    DataTable deleteOverdue = new DataTable();
+                    mySqlDataAdapter.Fill(deleteOverdue);
+                    mySqlDataAdapter.Update(deleteOverdue);
 
+                    MessageBox.Show("도서를 반납하였습니다.");
+
+                    MySqlDataAdapter loadbookRent = new MySqlDataAdapter("select rent.도서번호, search.도서명, search.글쓴이, search.출판사, search.도서상태, rent.대출일, rent.반납일, rent.메모 from squad_library.bookrent rent join squad_library.search1 search on rent.도서번호 = search.도서번호 where date(rent.반납일) < date(now());", conn);
+                    DataSet dataTable = new DataSet();
+                    loadbookRent.Fill(dataTable, "dataTable");
+                    BindingSource bindingSource = new BindingSource();
+                    bindingSource.DataSource = dataTable;
+                    dataGridView2.DataSource = dataTable.Tables["dataTable"];
+
+                    MySqlDataAdapter loadUserAdap = new MySqlDataAdapter("select user.회원번호, user.회원명, user.등급, user.회원상태, user.전화번호, user.주소, user.메모 from squad_library.bookrent rent join squad_library.user user on rent.회원번호 = user.회원번호 WHERE date(rent.반납일) < date(now());", conn);
+                    DataSet userDataTable = new DataSet();
+                    loadUserAdap.Fill(userDataTable, "userDataTable");
+                    BindingSource bindingUserSource = new BindingSource();
+                    bindingUserSource.DataSource = userDataTable;
+                    dataGridView1.DataSource = userDataTable.Tables["userDataTable"];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
         }
     }
-    }
+}

@@ -235,7 +235,10 @@ namespace 스쿼드_도서관.data
             {
                 MessageBox.Show("반납 할 도서 정보가 없습니다.");
             }
-
+            else if(comboBox5.Text == "연체")
+            {
+                MessageBox.Show("해당 도서는 연체 상태입니다. 도서를 연체 페이지에서 반납해주세요.");
+            }
             else
             {
                 //delete를 통해 DB로 삭제된 데이터 전송 - 기본키 기준으로 삭제위치 탐색

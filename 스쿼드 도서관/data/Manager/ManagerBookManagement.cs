@@ -18,34 +18,37 @@ namespace 스쿼드_도서관
             InitializeComponent();
         }
 
+        // 여기서부터 대출 여부 출력 기능 만들기
+        string myconnect = "datasource = localhost; port = 3306; username=root; password=1234;";
         private void button1_Click(object sender, EventArgs e)
         {
-            string myconnect = "datasource = localhost; port = 3306; username=root; password=qkrwltn5130!;";
-            string query = "insert into squad_library.search1(도서명, 도서번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 대출여부, 메모)" +
-                "value('" + this.textBox1.Text + "', '" + this.textBox7.Text + "', '" + this.textBox2.Text + "', '" + this.textBox4.Text + "', '" + this.textBox3.Text + "', '" + this.textBox6.Text + "', '" + this.textBox5.Text + "', " +
-                "'" + this.comboBox1.Text + "', '" + this.comboBox2.Text + "', '" + this.textBox11.Text + "'); ";
-
+            string query = "insert into squad_library.search1(도서명, 도서번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 메모)" +
+                "value(@도서명, @도서번호, @글쓴이, @출판사, @출판일, @페이지, @도서가격, @도서상태, @메모); ";
 
             MySqlConnection myconn = new MySqlConnection(myconnect);
 
             MySqlCommand cmd = new MySqlCommand(query, myconn);
 
-            MySqlDataReader myReader;
+            cmd.Parameters.AddWithValue("@도서명", this.textBox1.Text);
+            cmd.Parameters.AddWithValue("@도서번호", this.textBox7.Text);
+            cmd.Parameters.AddWithValue("@글쓴이", this.textBox2.Text);
+            cmd.Parameters.AddWithValue("@출판사", this.textBox4.Text);
+            cmd.Parameters.AddWithValue("@출판일", this.textBox3.Text);
+            cmd.Parameters.AddWithValue("@페이지", this.textBox6.Text);
+            cmd.Parameters.AddWithValue("@도서가격", this.textBox5.Text);
+            cmd.Parameters.AddWithValue("@도서상태", this.comboBox1.Text);
+            cmd.Parameters.AddWithValue("@메모", this.textBox11.Text);
 
             try
             {
                 myconn.Open();
-
-                myReader = cmd.ExecuteReader();
+                LoadData();
                 MessageBox.Show("저장되었습니다.");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-            LoadData();
-
         }
 
         private void bookmanagement_Load(object sender, EventArgs e)

@@ -284,6 +284,13 @@ namespace 스쿼드_도서관.data
                     conn.Close();
                 }
             }
+
+            // 대출일과 반납일 출력
+            dateTimePicker1.Format = DateTimePickerFormat.Long;
+            dateTimePicker1.Value = DateTime.Now.AddDays(14);
+            textBox10.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            textBox9.Text = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+            dateTimePicker1.Value = DateTime.Now;
         }
 
 
@@ -425,7 +432,6 @@ namespace 스쿼드_도서관.data
                         conn.Close();
                     }
                 }
-
             }
 
         }
