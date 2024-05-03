@@ -42,7 +42,7 @@ namespace 스쿼드_도서관.data
 
             try  // 도서 정보 DB 연결
             {
-                MySqlDataAdapter adap = new MySqlDataAdapter("select 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 대출일, 반납일, 메모 from squad_library.search1", conn);
+                MySqlDataAdapter adap = new MySqlDataAdapter("select 도서번호, 도서명, 글쓴이, 출판사, 도서상태, 메모 from squad_library.search1", conn);
 
                 conn.Open();
 

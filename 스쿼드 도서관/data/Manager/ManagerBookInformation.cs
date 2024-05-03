@@ -13,7 +13,8 @@ namespace 스쿼드_도서관
 {
     public partial class ManagerBookInformation : UserControl
     {
-        static string conString = "Server=localhost;Database=squad_library;username=root;password=qkrwltn5130!";
+        static string conString = "Server=localhost;Database=squad_library;username=root;password=1234";
+        MySqlConnection connection = new MySqlConnection(conString);  //DB 주소 가져오기
 
         public ManagerBookInformation()
         {
@@ -24,8 +25,7 @@ namespace 스쿼드_도서관
         {
             try
             {
-                MySqlConnection connection = new MySqlConnection(conString);
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM squad_library.search1", connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 글쓴이, 출판사, 도서상태, 도서번호 FROM squad_library.search1", connection);
 
                 connection.Open();
 
@@ -48,8 +48,7 @@ namespace 스쿼드_도서관
             {
                 try
                 {
-                    MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=qkrwltn5130!");  //DB 주소 가져오기
-                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 글쓴이, 출판사, 도서갯수, 도서상태, 대출여부, 도서번호  FROM squad_library.search1 where 도서명 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태  FROM squad_library.search1 where 도서명 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
                     connection.Open();  // DB 연결 시작
 
@@ -66,8 +65,7 @@ namespace 스쿼드_도서관
             {
                 try
                 {
-                    MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=qkrwltn5130!");  //DB 주소 가져오기
-                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 글쓴이, 출판사, 도서갯수, 도서상태, 대출여부, 책번호  FROM squad_library.search1 where 글쓴이 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태  FROM squad_library.search1 where 글쓴이 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
                     connection.Open();  // DB 연결 시작
 
@@ -84,8 +82,7 @@ namespace 스쿼드_도서관
             {
                 try
                 {
-                    MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=qkrwltn5130!");  //DB 주소 가져오기
-                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 글쓴이, 출판사, 도서갯수, 도서상태, 대출여부, 책번호  FROM squad_library.search1 where 출판사 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태  FROM squad_library.search1 where 출판사 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
                     connection.Open();  // DB 연결 시작
 
@@ -98,31 +95,12 @@ namespace 스쿼드_도서관
                     MessageBox.Show(ex.Message);
                 }
 
-            }
-            else if(comboBox3.Text == "도서 갯수")
-            {
-                try
-                {
-                    MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=qkrwltn5130!");  //DB 주소 가져오기
-                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 글쓴이, 출판사, 도서갯수, 도서상태, 대출여부, 책번호  FROM squad_library.search1 where 도서갯수 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
-
-                    connection.Open();  // DB 연결 시작
-
-                    DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "search1");  //search1 테이블 채우기
-                    dataGridView1.DataSource = ds.Tables["search1"];  // 테이블 보이기
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
             }
             else if (comboBox3.Text == "도서 상태")
             {
                 try
                 {
-                    MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=qkrwltn5130!");  //DB 주소 가져오기
-                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 글쓴이, 출판사, 도서갯수, 도서상태, 대출여부, 책번호  FROM squad_library.search1 where 도서상태 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태  FROM squad_library.search1 where 도서상태 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
                     connection.Open();  // DB 연결 시작
 
@@ -139,8 +117,7 @@ namespace 스쿼드_도서관
             {
                 try
                 {
-                    MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=qkrwltn5130!");  //DB 주소 가져오기
-                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 글쓴이, 출판사, 도서갯수, 도서상태, 대출여부, 책번호  FROM squad_library.search1 where 대출여부 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태  FROM squad_library.search1 where 대출여부 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
                     connection.Open();  // DB 연결 시작
 
@@ -157,8 +134,7 @@ namespace 스쿼드_도서관
             {
                 try
                 {
-                    MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=qkrwltn5130!");  //DB 주소 가져오기
-                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 글쓴이, 출판사, 도서갯수, 도서상태, 대출여부, 책번호  FROM squad_library.search1 where 책번호 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태  FROM squad_library.search1 where 도서번호 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
                     connection.Open();  // DB 연결 시작
 

@@ -40,8 +40,6 @@ namespace 스쿼드_도서관
             this.도서관리ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.신착추천도서ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.도서검색ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.검색도서정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.불러오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.신청구매도서목록ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.구매도서ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.회원관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,8 +130,8 @@ namespace 스쿼드_도서관
             this.도서관리ToolStripMenuItem1,
             this.신착추천도서ToolStripMenuItem});
             this.도서관ToolStripMenuItem.Name = "도서관ToolStripMenuItem";
-            this.도서관ToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
-            this.도서관ToolStripMenuItem.Text = "도서관리";
+            this.도서관ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.도서관ToolStripMenuItem.Text = "도서 관리";
             this.도서관ToolStripMenuItem.Click += new System.EventHandler(this.도서관ToolStripMenuItem_Click);
             // 
             // 도서관리ToolStripMenuItem1
@@ -152,38 +150,22 @@ namespace 스쿼드_도서관
             // 
             // 도서검색ToolStripMenuItem
             // 
-            this.도서검색ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.검색도서정보ToolStripMenuItem,
-            this.불러오기ToolStripMenuItem});
             this.도서검색ToolStripMenuItem.Name = "도서검색ToolStripMenuItem";
-            this.도서검색ToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.도서검색ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.도서검색ToolStripMenuItem.Text = "도서 검색";
-            // 
-            // 검색도서정보ToolStripMenuItem
-            // 
-            this.검색도서정보ToolStripMenuItem.Name = "검색도서정보ToolStripMenuItem";
-            this.검색도서정보ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
-            this.검색도서정보ToolStripMenuItem.Text = "검색/도서정보";
-            this.검색도서정보ToolStripMenuItem.Click += new System.EventHandler(this.검색도서정보ToolStripMenuItem_Click);
-            // 
-            // 불러오기ToolStripMenuItem
-            // 
-            this.불러오기ToolStripMenuItem.Name = "불러오기ToolStripMenuItem";
-            this.불러오기ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
-            this.불러오기ToolStripMenuItem.Text = "불러오기";
-            this.불러오기ToolStripMenuItem.Click += new System.EventHandler(this.불러오기ToolStripMenuItem_Click);
+            this.도서검색ToolStripMenuItem.Click += new System.EventHandler(this.도서검색ToolStripMenuItem_Click);
             // 
             // 신청구매도서목록ToolStripMenuItem
             // 
             this.신청구매도서목록ToolStripMenuItem.Name = "신청구매도서목록ToolStripMenuItem";
-            this.신청구매도서목록ToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.신청구매도서목록ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.신청구매도서목록ToolStripMenuItem.Text = "신청 도서";
             this.신청구매도서목록ToolStripMenuItem.Click += new System.EventHandler(this.신청구매도서목록ToolStripMenuItem_Click);
             // 
             // 구매도서ToolStripMenuItem
             // 
             this.구매도서ToolStripMenuItem.Name = "구매도서ToolStripMenuItem";
-            this.구매도서ToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.구매도서ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.구매도서ToolStripMenuItem.Text = "구매 도서";
             this.구매도서ToolStripMenuItem.Click += new System.EventHandler(this.구매도서ToolStripMenuItem_Click);
             // 
@@ -328,8 +310,6 @@ namespace 스쿼드_도서관
         private System.Windows.Forms.ToolStripMenuItem 운영설정ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 운영규정ToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStripMenuItem 불러오기ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 검색도서정보ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 대출환경설정ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 신청구매도서목록ToolStripMenuItem;
         private System.Windows.Forms.Label label1;

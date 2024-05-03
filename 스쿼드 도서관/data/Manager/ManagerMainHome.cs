@@ -64,11 +64,6 @@ namespace 스쿼드_도서관
             mainPanel(bc);
         }
 
-        private void 검색도서정보ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ManagerBookInformation bi = new ManagerBookInformation();
-            mainPanel(bi);
-        }
 
         private void 공지사항ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -133,6 +128,12 @@ namespace 스쿼드_도서관
         {
             ManagerNewBook mn = new ManagerNewBook();
             mainPanel(mn);
+        }
+
+        private void 도서검색ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ManagerBookInformation bi = new ManagerBookInformation();
+            mainPanel(bi);
         }
     }
 }

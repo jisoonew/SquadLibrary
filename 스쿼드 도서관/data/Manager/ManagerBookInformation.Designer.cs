@@ -82,7 +82,6 @@ namespace 스쿼드_도서관
             "도서명",
             "글쓴이",
             "출판사",
-            "도서 갯수",
             "도서 상태",
             "대출 여부",
             "도서 번호"});
@@ -91,7 +90,7 @@ namespace 스쿼드_도서관
             this.comboBox3.Size = new System.Drawing.Size(121, 20);
             this.comboBox3.TabIndex = 5;
             // 
-            // bookinformation
+            // ManagerBookInformation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -100,7 +99,7 @@ namespace 스쿼드_도서관
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
-            this.Name = "bookinformation";
+            this.Name = "ManagerBookInformation";
             this.Size = new System.Drawing.Size(653, 542);
             this.Load += new System.EventHandler(this.bookinformation_Load);
             this.groupBox1.ResumeLayout(false);
