@@ -73,6 +73,7 @@ namespace 스쿼드_도서관
             }
 
             //텍스트 박스 초기화
+            textBox8.Text = ""; // 이미지 주소
             textBox1.Text = "";
             textBox7.Text = "";
             textBox2.Text = "";
@@ -182,7 +183,6 @@ namespace 스쿼드_도서관
 
                                 mySqlDataAdapter.Update(dataSet);
                                     
-
                                 MessageBox.Show("도서 정보가 저장되었습니다.");
                             }
                         }
@@ -226,21 +226,40 @@ namespace 스쿼드_도서관
                     MySqlCommand blobCommand = new MySqlCommand(query, mySqlConnection);
                     blobCommand.Parameters.AddWithValue("@도서번호", this.textBox7.Text);
 
+                    // 이미지 데이터를 바이트 배열로 가져옴
+                    byte[] imageData = (byte[])blobCommand.ExecuteScalar();
+
+                    // 이미지 로드
                     using (MySqlDataReader blobReader = blobCommand.ExecuteReader())
                     {
-                        if (blobReader.Read())
+                        if (blobReader.Read()) // 데이터가 있는지 확인
                         {
-                            // BLOB 데이터를 읽어와서 스트림으로 변환
-                            using (MemoryStream ms = new MemoryStream((byte[])blobReader["책표지"]))
+                            // longblob에 데이터가 있다면 길이가 0 이상이다.
+                            if (imageData.Length > 0)
                             {
-                                // 스트림을 사용하여 이미지를 로드하고 표시
-                                pictureBox1.Image = Image.FromStream(ms);
+                                // BLOB 데이터를 읽어와서 스트림으로 변환
+                                using (MemoryStream ms = new MemoryStream((byte[])blobReader["책표지"]))
+                                {
+                                    // 스트림을 사용하여 이미지를 로드하고 표시
+                                    pictureBox1.Image = Image.FromStream(ms);
+                                }
                             }
+                            else
+                            {
+                                pictureBox1.Image = null; // 또는 다른 이미지를 설정
+                            }
+                        }
+                        else
+                        {
+                            // 데이터가 없는 경우에 대한 처리
+                            // 이미지를 초기화하거나 기본 이미지를 설정할 수 있습니다.
+                            pictureBox1.Image = null; // 또는 다른 이미지를 설정
                         }
                     }
 
                     int rentCount = Convert.ToInt32(sqlCommand.ExecuteScalar());
 
+                    // 대출 여부
                     if (rentCount > 0)
                     {
                         DateTime loanDate = Convert.ToDateTime(loanDateCommand.ExecuteScalar());
@@ -513,6 +532,7 @@ namespace 스쿼드_도서관
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 textBox8.Text = dialog.FileName; // 이미지 경로 출력
+                pictureBox1.Load(dialog.FileName);
             }
         }
     }
