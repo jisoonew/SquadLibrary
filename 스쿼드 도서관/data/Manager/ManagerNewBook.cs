@@ -18,114 +18,69 @@ namespace 스쿼드_도서관
             InitializeComponent();
         }
 
-        static string myConnection = "Server=localhost;Database=squad_library;username=root;password=qkrwltn5130!;";
-
+        static string myConnection = "Server=localhost;Database=squad_library;username=root;password=1234;";
+        
         private ManagerBookManagement bmn = new ManagerBookManagement();
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string myconnect = "datasource = localhost; port = 3306; username=root; password=qkrwltn5130!;";
-            string query = "INSERT INTO squad_library.newbook value('" + bmn.textBox7.Text + "', '" + bmn.textBox1.Text + "', '" + bmn.textBox2.Text + "', '" + bmn.textBox4.Text + "', '" + bmn.textBox6.Text + "');";
-
-
-            MySqlConnection myconn = new MySqlConnection(myconnect);
-
-            MySqlCommand cmd = new MySqlCommand(query, myconn);
-
-            MySqlDataReader myReader;
-
-            try
-            {
-                myconn.Open();
-
-                myReader = cmd.ExecuteReader();
-                MessageBox.Show("신착 도서로 지정되었습니다.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            string myconnect = "datasource = localhost; port = 3306; username=root; password=qkrwltn5130!;";
-            string query = "INSERT INTO squad_library.user_recommend value('" + bmn.textBox7.Text + "', '" + bmn.textBox1.Text + "', '" + bmn.textBox2.Text + "', '" + bmn.textBox4.Text + "', '" + bmn.textBox6.Text + "');";
-
-
-            MySqlConnection myconn = new MySqlConnection(myconnect);
-
-            MySqlCommand cmd = new MySqlCommand(query, myconn);
-
-            MySqlDataReader myReader;
-
-            try
-            {
-                myconn.Open();
-
-                myReader = cmd.ExecuteReader();
-                MessageBox.Show("추천 도서로 지정되었습니다.");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            myconn.Close();
-        }
 
         private void mn_newbook_Load(object sender, EventArgs e)
         {
             try
             {
-                MySqlConnection connection = new MySqlConnection(myConnection);
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM squad_library.newbook", connection);
+                using (MySqlConnection connection = new MySqlConnection(myConnection))
+                {
+                    MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM squad_library.newbook", connection);
+                    MySqlDataAdapter recommendAdapter = new MySqlDataAdapter("SELECT * FROM squad_library.recommend", connection);
+                    MySqlDataAdapter bookAdapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.search1", connection);
 
-                connection.Open();
+                    connection.Open();
 
-                DataSet ds = new DataSet();
-                adapter.Fill(ds, "squad_library");
-                dataGridView1.DataSource = ds.Tables["squad_library"];
+                    // 신착 도서
+                    DataSet ds = new DataSet();
+                    adapter.Fill(ds, "newBookDs");
+                    dataGridView1.DataSource = ds.Tables["newBookDs"];
 
-                connection.Close();
+                    // 추천 도서
+                    DataSet recommendDs = new DataSet();
+                    recommendAdapter.Fill(recommendDs, "recommendDs");
+                    dataGridView2.DataSource = recommendDs.Tables["recommendDs"];
 
+                    // 전체 도서 출력
+                    DataSet bookDs = new DataSet();
+                    bookAdapter.Fill(bookDs, "bookDs");
+                    dataGridView3.DataSource = bookDs.Tables["bookDs"];
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        // 신착 도서 지정
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow selectedRow = dataGridView3.SelectedRows[0];
+            string bookNum = selectedRow.Cells[0].Value.ToString();
+            DateTime today = DateTime.Today;
+            string query = "INSERT INTO squad_library.newbook value('" + bookNum + "', '" + today.ToString("yyyy-MM-dd") + "');";
 
             try
             {
-                MySqlConnection connection = new MySqlConnection(myConnection);
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM squad_library.user_recommend", connection);
+                using (MySqlConnection myconn = new MySqlConnection(myConnection))
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, myconn);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
 
-                connection.Open();
+                    myconn.Open();
 
-                DataSet ds = new DataSet();
-                adapter.Fill(ds, "squad_library");
-                dataGridView2.DataSource = ds.Tables["squad_library"];
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    adapter.Update(dataTable);
 
-                connection.Close();
+                    MessageBox.Show("신착 도서로 지정되었습니다.");
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            try
-            {
-                MySqlConnection connection = new MySqlConnection(myConnection);
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.search1", connection);
-
-                connection.Open();
-
-                DataSet ds = new DataSet();
-                adapter.Fill(ds, "squad_library");
-                dataGridView3.DataSource = ds.Tables["squad_library"];
-
-                connection.Close();
+                    LoadData();
+                }
 
             }
             catch (Exception ex)
@@ -134,25 +89,35 @@ namespace 스쿼드_도서관
             }
         }
 
+        // 신착 도서 삭제
         private void button2_Click(object sender, EventArgs e)
         {
-            string constring = "datasource=localhost;port=3306;username=root;password=qkrwltn5130!";
             //delete를 통해 DB로 삭제된 데이터 전송 - 기본키 기준으로 삭제위치 탐색
-            string Query = "delete from squad_library.newbook where 도서번호 = '" + this.label1.Text + "';";
-            MySqlConnection conDataBase = new MySqlConnection(constring);
-            MySqlCommand cmdDatabase = new MySqlCommand(Query, conDataBase);
-            MySqlDataReader myReader;
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+            string bookNum = selectedRow.Cells[0].Value.ToString();
+            Console.Write("응애 : " + bookNum);
+            string Query = "delete from squad_library.newbook where 도서번호 = '" + bookNum + "';";
 
             try
             {
-                conDataBase.Open();
-                myReader = cmdDatabase.ExecuteReader();
-                MessageBox.Show("신착 도서를 삭제했습니다.");
-
-                while (myReader.Read())
+                using (MySqlConnection conDataBase = new MySqlConnection(myConnection))
                 {
+                    MySqlCommand cmdDatabase = new MySqlCommand(Query, conDataBase);
 
+                    conDataBase.Open();
+
+                    int rowsAffected = cmdDatabase.ExecuteNonQuery(); // 쿼리 실행 및 영향을 받은 행 수 반환
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("신착 도서를 삭제했습니다.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("해당 도서를 찾을 수 없습니다.");
+                    }
                 }
+
             }
             catch (Exception ex)
             {
@@ -162,23 +127,32 @@ namespace 스쿼드_도서관
             LoadData();
         }
 
-        public void LoadData()
+        // 추천 도서 지정
+        private void button3_Click(object sender, EventArgs e)
         {
-            string sql = "Server=localhost;Port=3306;username=root;password=qkrwltn5130!";
-            MySqlConnection con = new MySqlConnection(sql);
-            MySqlCommand cmd_db = new MySqlCommand("SELECT * FROM squad_library.newbook;", con);
+            DataGridViewRow selectedRow = dataGridView3.SelectedRows[0];
+            string bookNum = selectedRow.Cells[0].Value.ToString();
+            DateTime today = DateTime.Today;
+            string query = "INSERT INTO squad_library.recommend value('" + bookNum + "', '" + today.ToString("yyyy-MM-dd") + "');";
 
             try
             {
-                MySqlDataAdapter sda = new MySqlDataAdapter();
-                sda.SelectCommand = cmd_db;
-                DataTable dbdataset = new DataTable();
-                sda.Fill(dbdataset);
-                BindingSource bSource = new BindingSource();
+                using (MySqlConnection myconn = new MySqlConnection(myConnection))
+                {
+                    MySqlCommand cmd = new MySqlCommand(query, myconn);
 
-                bSource.DataSource = dbdataset;
-                dataGridView1.DataSource = bSource;
-                sda.Update(dbdataset);
+                    MySqlDataAdapter recommend = new MySqlDataAdapter(cmd);
+
+                    myconn.Open();
+
+                    DataTable dataTable = new DataTable();
+                    recommend.Fill(dataTable);
+                    recommend.Update(dataTable);
+
+                    MessageBox.Show("추천 도서로 지정되었습니다.");
+
+                    LoadData2();
+                }
             }
             catch (Exception ex)
             {
@@ -186,53 +160,32 @@ namespace 스쿼드_도서관
             }
         }
 
-        public void LoadData2()
-        {
-            string sql = "Server=localhost;Port=3306;username=root;password=qkrwltn5130!";
-            MySqlConnection con = new MySqlConnection(sql);
-            MySqlCommand cmd_db = new MySqlCommand("SELECT * FROM squad_library.user_recommend;", con);
-
-            try
-            {
-                MySqlDataAdapter sda = new MySqlDataAdapter();
-                sda.SelectCommand = cmd_db;
-                DataTable dbdataset = new DataTable();
-                sda.Fill(dbdataset);
-                BindingSource bSource = new BindingSource();
-
-                bSource.DataSource = dbdataset;
-                dataGridView2.DataSource = bSource;
-                sda.Update(dbdataset);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            label1.Text = dataGridView1.Rows[this.dataGridView1.CurrentCellAddress.Y].Cells[0].Value.ToString();
-        }
-
+        // 추천 도서 삭제
         private void button4_Click(object sender, EventArgs e)
         {
-            string constring = "datasource=localhost;port=3306;username=root;password=qkrwltn5130!";
             //delete를 통해 DB로 삭제된 데이터 전송 - 기본키 기준으로 삭제위치 탐색
-            string Query = "delete from squad_library.user_recommend where 도서번호 = '" + this.label2.Text + "';";
-            MySqlConnection conDataBase = new MySqlConnection(constring);
-            MySqlCommand cmdDatabase = new MySqlCommand(Query, conDataBase);
-            MySqlDataReader myReader;
+            DataGridViewRow selectedRow = dataGridView2.SelectedRows[0];
+            string bookNum = selectedRow.Cells[0].Value.ToString();
+            string Query = "delete from squad_library.recommend where 도서번호 = '" + bookNum + "';";
 
             try
             {
-                conDataBase.Open();
-                myReader = cmdDatabase.ExecuteReader();
-                MessageBox.Show("추천 도서를 삭제했습니다.");
-
-                while (myReader.Read())
+                using (MySqlConnection conDataBase = new MySqlConnection(myConnection))
                 {
+                    MySqlCommand cmdDatabase = new MySqlCommand(Query, conDataBase);
 
+                    conDataBase.Open();
+
+                    int result = cmdDatabase.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        MessageBox.Show("추천 도서를 삭제했습니다.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("해당 도서를 찾을 수 없습니다.");
+                    }
                 }
             }
             catch (Exception ex)
@@ -243,25 +196,54 @@ namespace 스쿼드_도서관
             LoadData2();
         }
 
-        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            label2.Text = dataGridView2.Rows[this.dataGridView2.CurrentCellAddress.Y].Cells[0].Value.ToString();
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        // 신착 도서 그리드뷰 로드
+        public void LoadData()
         {
             try
             {
-                textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                textBox2.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                textBox3.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                textBox4.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                textBox5.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+                using (MySqlConnection con = new MySqlConnection(myConnection))
+                {
+                    MySqlCommand cmd_db = new MySqlCommand("SELECT * FROM squad_library.newbook;", con);
+                    MySqlDataAdapter sda = new MySqlDataAdapter();
+
+                    con.Open();
+
+                    sda.SelectCommand = cmd_db;
+                    DataTable dbdataset = new DataTable();
+                    sda.Fill(dbdataset);
+                    BindingSource bSource = new BindingSource();
+
+                    bSource.DataSource = dbdataset;
+                    dataGridView1.DataSource = bSource;
+                    sda.Update(dbdataset);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        // 추천 도서 그리드뷰 로드
+        public void LoadData2()
+        {
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(myConnection))
+                {
+                    MySqlCommand cmd_db = new MySqlCommand("SELECT * FROM squad_library.recommend;", con);
+
+                    MySqlDataAdapter sda = new MySqlDataAdapter();
+                    sda.SelectCommand = cmd_db;
+                    DataTable dbdataset = new DataTable();
+                    sda.Fill(dbdataset);
+                    BindingSource bSource = new BindingSource();
+
+                    bSource.DataSource = dbdataset;
+                    dataGridView2.DataSource = bSource;
+
+                    sda.Update(dbdataset);
+                }
             }
             catch (Exception ex)
             {
