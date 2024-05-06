@@ -19,21 +19,25 @@ namespace 스쿼드_도서관.data
         }
 
         // readonly == 상수, 런타임 상수 입니다. 즉, "프로그램이 실행중에 초기화 하는것도 가능한" 상수
-        readonly MySqlConnection conn = new MySqlConnection("datasource=localhost; port=3306; username=root; password=1234");
+        string query = "datasource=localhost; port=3306; username=root; password=1234; charset=utf8mb4;";
+        readonly MySqlConnection conn = new MySqlConnection("datasource=localhost; port=3306; username=root; password=1234; charset=utf8mb4;");
 
         private void UserManagement_Load(object sender, EventArgs e)
         {
-
             try
             {
-                MySqlDataAdapter adap = new MySqlDataAdapter("select * from squad_library.user", conn);
+                using (MySqlConnection conn = new MySqlConnection(query))
+                {
+                    MySqlDataAdapter adap = new MySqlDataAdapter("select * from squad_library.user", conn);
 
-                conn.Open();
+                    conn.Open();
 
-                DataSet ds = new DataSet();
-                adap.Fill(ds, "userData");
-                dataGridView1.DataSource = ds.Tables["userData"];
-                conn.Close();
+                    DataSet ds = new DataSet();
+                    adap.Fill(ds, "userData");
+                    BindingSource bindingSource = new BindingSource();
+                    bindingSource.DataSource = ds;
+                    dataGridView1.DataSource = ds.Tables["userData"];
+                } 
             }
             catch (Exception ex)
             {
@@ -179,7 +183,6 @@ namespace 스쿼드_도서관.data
         // 회원 정보 삭제
         private void button2_Click(object sender, EventArgs e)
         {
-            string constring = "datasource=localhost; port=3306; username=root; password=1234";
             if (userID.Text == "")
             {
                 MessageBox.Show("삭제 할 항목을 찾지 못했습니다.");
@@ -188,7 +191,12 @@ namespace 스쿼드_도서관.data
             {
                 //delete를 통해 DB로 삭제된 데이터 전송 - 기본키 기준으로 삭제위치 탐색
                 string Query = "delete from squad_library.user where 회원번호 ='" + this.userNum.Text + "';";
-                MySqlConnection conDataBase = new MySqlConnection(constring);
+                string rentQuery = "delete from squad_library.bookrent where 회원번호 = @회원번호";
+                MySqlConnection rentConnection = new MySqlConnection(query);
+                MySqlCommand rentDelete = new MySqlCommand(rentQuery, rentConnection);
+                rentDelete.Parameters.AddWithValue("@회원번호", userNum.Text);
+
+                MySqlConnection conDataBase = new MySqlConnection(query);
                 MySqlCommand cmdDatabase = new MySqlCommand(Query, conDataBase);
                 MySqlDataReader myReader;
 
@@ -196,11 +204,20 @@ namespace 스쿼드_도서관.data
                 {
                     conDataBase.Open();
                     myReader = cmdDatabase.ExecuteReader();
-                    MessageBox.Show("회원 정보를 삭제했습니다.");
 
                     while (myReader.Read())
                     {
+                        int query = cmdDatabase.ExecuteNonQuery(); // 삭제를 진행하고 영향을 받은 행의 수를 반환
+                        int rentEx = rentDelete.ExecuteNonQuery();
 
+                        if (query > 0 || rentEx > 0)
+                        {
+                            MessageBox.Show("회원 정보를 삭제했습니다.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("회원 정보를 삭제할 수 없습니다.");
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -212,6 +229,7 @@ namespace 스쿼드_도서관.data
             }
         }
 
+        // 회원 정보
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -230,6 +248,18 @@ namespace 스쿼드_도서관.data
                 userAddress.Text = dataGridView1.Rows[e.RowIndex].Cells[11].Value.ToString(); // 주소
                 userMemo.Text = dataGridView1.Rows[e.RowIndex].Cells[12].Value.ToString(); // 메모
 
+                using (MySqlConnection connection = new MySqlConnection(query))
+                {
+                    MySqlCommand mySqlCommand = new MySqlCommand("select count(*) from squad_library.user user join squad_library.bookrent rent on user.회원번호 = rent.회원번호 where rent.회원번호 = @회원번호", connection);
+                    DataGridViewRow selectedRow = dataGridView1.SelectedRows[0]; // 회원번호
+                    mySqlCommand.Parameters.AddWithValue("@회원번호", selectedRow);
+                    MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(mySqlCommand);
+
+                    connection.Open();
+
+                    int resultNum = mySqlCommand.ExecuteNonQuery();
+                    yesLoan.Text = (5 - resultNum).ToString(); // 대출 가능 권 수
+                }
             }
             catch (Exception ex)
             {
@@ -375,6 +405,5 @@ namespace 스쿼드_도서관.data
 
             LoadData();
         }
-
     }
 }

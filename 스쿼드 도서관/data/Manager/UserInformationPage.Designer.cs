@@ -244,11 +244,11 @@ namespace 스쿼드_도서관.data
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(227, 377);
+            this.button2.Location = new System.Drawing.Point(211, 377);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(83, 30);
+            this.button2.Size = new System.Drawing.Size(99, 30);
             this.button2.TabIndex = 75;
-            this.button2.Text = "삭제";
+            this.button2.Text = "회원 정보 삭제";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -487,11 +487,11 @@ namespace 스쿼드_도서관.data
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(549, 379);
+            this.button1.Location = new System.Drawing.Point(532, 379);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(83, 30);
+            this.button1.Size = new System.Drawing.Size(100, 30);
             this.button1.TabIndex = 28;
-            this.button1.Text = "저장";
+            this.button1.Text = "기존 회원 수정";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

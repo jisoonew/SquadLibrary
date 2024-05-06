@@ -42,6 +42,9 @@ namespace 스쿼드_도서관
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -166,11 +169,45 @@ namespace 스쿼드_도서관
             this.textBox5.Size = new System.Drawing.Size(100, 21);
             this.textBox5.TabIndex = 35;
             // 
+            // textBox6
+            // 
+            this.textBox6.Font = new System.Drawing.Font("굴림", 10F);
+            this.textBox6.Location = new System.Drawing.Point(320, 58);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(236, 23);
+            this.textBox6.TabIndex = 36;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(562, 58);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 37;
+            this.button5.Text = "검색";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("굴림", 10F);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "도서 번호",
+            "도서명",
+            "출판사"});
+            this.comboBox1.Location = new System.Drawing.Point(221, 60);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(93, 21);
+            this.comboBox1.TabIndex = 38;
+            // 
             // ManagerNewBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.textBox6);
             this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
@@ -211,5 +248,8 @@ namespace 스쿼드_도서관
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

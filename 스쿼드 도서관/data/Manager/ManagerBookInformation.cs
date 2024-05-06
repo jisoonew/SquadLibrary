@@ -25,7 +25,7 @@ namespace 스쿼드_도서관
         {
             try
             {
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 글쓴이, 출판사, 도서상태, 도서번호 FROM squad_library.search1", connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 도서상태 FROM squad_library.search1", connection);
 
                 connection.Open();
 

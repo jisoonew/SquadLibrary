@@ -250,5 +250,59 @@ namespace 스쿼드_도서관
                 MessageBox.Show(ex.Message);
             }
         }
+
+        // 검색
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string query = "SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.search1 where 도서번호 = @도서번호";
+            string bookNameQuery = "SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.search1 where 도서명 = @도서명";
+            string bookQuery = "SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.search1 where 출판사 = @출판사";
+
+            using (MySqlConnection connection = new MySqlConnection(myConnection))
+            {
+                if(comboBox1.Text == "도서번호") {
+                    MySqlCommand mySqlCommand = new MySqlCommand(query, connection);
+                    MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(mySqlCommand);
+                    mySqlCommand.Parameters.AddWithValue("@도서번호", dataGridView3.SelectedRows[0]);
+
+                    DataTable dataTable = new DataTable();
+                    mySqlDataAdapter.Fill(dataTable);
+                    BindingSource bindingSource = new BindingSource();
+
+                    bindingSource.DataSource = dataTable;
+                    dataGridView3.DataSource = bindingSource;
+                }
+                else if (comboBox1.Text == "도서명")
+                {
+                    MySqlCommand mySqlCommand = new MySqlCommand(bookNameQuery, connection);
+                    MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(mySqlCommand);
+                    mySqlCommand.Parameters.AddWithValue("@도서명", dataGridView3.SelectedRows[1]);
+
+                    DataTable dataTable = new DataTable();
+                    mySqlDataAdapter.Fill(dataTable);
+                    BindingSource bindingSource = new BindingSource();
+
+                    bindingSource.DataSource = dataTable;
+                    dataGridView3.DataSource = bindingSource;
+                }
+                else if (comboBox1.Text == "출판사")
+                {
+                    MySqlCommand mySqlCommand = new MySqlCommand(bookQuery, connection);
+                    MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(mySqlCommand);
+                    mySqlCommand.Parameters.AddWithValue("@출판사", dataGridView3.SelectedRows[3]);
+
+                    DataTable dataTable = new DataTable();
+                    mySqlDataAdapter.Fill(dataTable);
+                    BindingSource bindingSource = new BindingSource();
+
+                    bindingSource.DataSource = dataTable;
+                    dataGridView3.DataSource = bindingSource;
+                }
+                else
+                {
+                    MessageBox.Show("해당 도서를 찾을 수 없습니다.");
+                }
+            }
+        }
     }
 }
