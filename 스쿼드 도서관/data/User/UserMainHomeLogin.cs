@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -161,7 +162,11 @@ namespace 스쿼드_도서관
 
         private void User_Homepage2_Load(object sender, EventArgs e)
         {
-            MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=1234");  //DB 주소 가져오기
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=1234"))
+                {
+                   
             MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 제목, 내용 FROM squad_library.question1", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
             connection.Open();  // DB 연결 시작
@@ -178,30 +183,74 @@ namespace 스쿼드_도서관
             dataGridView1.DataSource = ds1.Tables["manager_notice"];  // 테이블 보이기
 
 
-            pictureBox3.Load(@"C:\Users\pjsu2\OneDrive\바탕 화면\스쿼드 도서 이미지\사이코패스는 일상의 그늘에 숨어지낸다.jpg");
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            // 추천 도서
+            
+                    string query = "SELECT search.책표지 FROM squad_library.recommend reco join squad_library.search1 search on reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3;";
 
-            pictureBox4.Load(@"C:\Users\pjsu2\OneDrive\바탕 화면\스쿼드 도서 이미지\리얼 제주.jpg");
-            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+                    MySqlCommand command = new MySqlCommand(query, connection);
 
-            pictureBox5.Load(@"C:\Users\pjsu2\OneDrive\바탕 화면\스쿼드 도서 이미지\엔드 오브 타임.jpg");
-            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        int pictureBoxIndex = 3; // pictureBox3부터 시작
+                        while (reader.Read() && pictureBoxIndex >= 3 && pictureBoxIndex <= 5)
+                        {
+                            byte[] imageData = (byte[])reader["책표지"];
 
+                            PictureBox pictureBox = (PictureBox)this.Controls.Find("pictureBox" + pictureBoxIndex, true)[0];
+                            DisplayImageFromDatabase(imageData, pictureBox);
 
-            pictureBox8.Load(@"C:\Users\pjsu2\OneDrive\바탕 화면\스쿼드 도서 이미지\장면들.jpg");
-            pictureBox8.SizeMode = PictureBoxSizeMode.StretchImage;
+                            pictureBoxIndex++;
+                        }
+                    }
 
-            pictureBox7.Load(@"C:\Users\pjsu2\OneDrive\바탕 화면\스쿼드 도서 이미지\떨림과 울림.jpg");
-            pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
+                    // 신착 도서
+                    string newBookQuery = "SELECT search.책표지 FROM squad_library.newbook reco join squad_library.search1 search on reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3;";
 
-            pictureBox6.Load(@"C:\Users\pjsu2\OneDrive\바탕 화면\스쿼드 도서 이미지\서울의 맛집.jpg");
-            pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
+                    MySqlCommand newBookCommand = new MySqlCommand(newBookQuery, connection);
+
+                    using (MySqlDataReader reader2 = newBookCommand.ExecuteReader())
+                    {
+                        int pictureBoxIndex2 = 6;
+                        while (reader2.Read() && pictureBoxIndex2 <= 8)
+                        {
+                            byte[] imageData2 = (byte[])reader2["책표지"];
+
+                            PictureBox pictureBox2 = (PictureBox)this.Controls.Find("pictureBox" + pictureBoxIndex2, true)[0];
+                            DisplayImageFromDatabase(imageData2, pictureBox2);
+
+                            pictureBoxIndex2++;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("오류 발생: " + ex.Message);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             UserMainHomeNotLogin uh1 = new UserMainHomeNotLogin();
             uh1.Show();
+        }
+
+        // 이미지 데이터를 PictureBox에 출력하는 함수
+        private void DisplayImageFromDatabase(byte[] imageData, PictureBox pictureBox)
+        {
+            if (imageData != null && imageData.Length > 0)
+            {
+                using (MemoryStream ms = new MemoryStream(imageData))
+                {
+                    pictureBox.Image = Image.FromStream(ms);
+                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+            }
+            else
+            {
+                // 이미지 데이터가 없는 경우 기본 이미지를 설정할 수 있습니다.
+                pictureBox.Image = null;
+            }
         }
     }
 }

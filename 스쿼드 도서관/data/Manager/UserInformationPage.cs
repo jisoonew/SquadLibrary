@@ -250,14 +250,12 @@ namespace 스쿼드_도서관.data
 
                 using (MySqlConnection connection = new MySqlConnection(query))
                 {
-                    MySqlCommand mySqlCommand = new MySqlCommand("select count(*) from squad_library.user user join squad_library.bookrent rent on user.회원번호 = rent.회원번호 where rent.회원번호 = @회원번호", connection);
-                    DataGridViewRow selectedRow = dataGridView1.SelectedRows[0]; // 회원번호
-                    mySqlCommand.Parameters.AddWithValue("@회원번호", selectedRow);
+                    MySqlCommand mySqlCommand = new MySqlCommand("select count(*) from squad_library.bookrent where 회원번호 = @회원번호", connection);
+                    mySqlCommand.Parameters.AddWithValue("@회원번호", dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString());
                     MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(mySqlCommand);
 
                     connection.Open();
-
-                    int resultNum = mySqlCommand.ExecuteNonQuery();
+                    int resultNum = Convert.ToInt32(mySqlCommand.ExecuteScalar());
                     yesLoan.Text = (5 - resultNum).ToString(); // 대출 가능 권 수
                 }
             }

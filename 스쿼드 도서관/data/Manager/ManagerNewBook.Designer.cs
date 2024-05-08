@@ -37,14 +37,10 @@ namespace 스쿼드_도서관
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -54,7 +50,7 @@ namespace 스쿼드_도서관
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(21, 284);
+            this.dataGridView1.Location = new System.Drawing.Point(21, 304);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -64,7 +60,7 @@ namespace 스쿼드_도서관
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(341, 284);
+            this.dataGridView2.Location = new System.Drawing.Point(341, 304);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -74,7 +70,7 @@ namespace 스쿼드_도서관
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button1.Location = new System.Drawing.Point(21, 478);
+            this.button1.Location = new System.Drawing.Point(21, 490);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(111, 39);
             this.button1.TabIndex = 2;
@@ -85,7 +81,7 @@ namespace 스쿼드_도서관
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button2.Location = new System.Drawing.Point(207, 478);
+            this.button2.Location = new System.Drawing.Point(207, 490);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(111, 39);
             this.button2.TabIndex = 3;
@@ -96,7 +92,7 @@ namespace 스쿼드_도서관
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button3.Location = new System.Drawing.Point(341, 478);
+            this.button3.Location = new System.Drawing.Point(341, 490);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(111, 39);
             this.button3.TabIndex = 4;
@@ -107,7 +103,7 @@ namespace 스쿼드_도서관
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button4.Location = new System.Drawing.Point(525, 478);
+            this.button4.Location = new System.Drawing.Point(525, 490);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(111, 39);
             this.button4.TabIndex = 5;
@@ -118,7 +114,7 @@ namespace 스쿼드_도서관
             // dataGridView3
             // 
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(21, 99);
+            this.dataGridView3.Location = new System.Drawing.Point(21, 111);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowTemplate.Height = 23;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -128,58 +124,23 @@ namespace 스쿼드_도서관
             // pictureBox1
             // 
             this.pictureBox1.Image = global::스쿼드_도서관.Properties.Resources.적당;
-            this.pictureBox1.Location = new System.Drawing.Point(21, 16);
+            this.pictureBox1.Location = new System.Drawing.Point(21, 7);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(194, 65);
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(21, 99);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 31;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(127, 99);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
-            this.textBox2.TabIndex = 32;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(233, 99);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
-            this.textBox3.TabIndex = 33;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(339, 99);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 21);
-            this.textBox4.TabIndex = 34;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(445, 99);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 21);
-            this.textBox5.TabIndex = 35;
-            // 
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("굴림", 10F);
-            this.textBox6.Location = new System.Drawing.Point(320, 58);
+            this.textBox6.Location = new System.Drawing.Point(320, 49);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(236, 23);
             this.textBox6.TabIndex = 36;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(562, 58);
+            this.button5.Location = new System.Drawing.Point(562, 49);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 37;
@@ -195,25 +156,30 @@ namespace 스쿼드_도서관
             "도서 번호",
             "도서명",
             "출판사"});
-            this.comboBox1.Location = new System.Drawing.Point(221, 60);
+            this.comboBox1.Location = new System.Drawing.Point(221, 51);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(93, 21);
             this.comboBox1.TabIndex = 38;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(564, 91);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 12);
+            this.label1.TabIndex = 39;
+            this.label1.Text = "label1";
             // 
             // ManagerNewBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.dataGridView3);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -243,13 +209,9 @@ namespace 스쿼드_도서관
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
     }
 }

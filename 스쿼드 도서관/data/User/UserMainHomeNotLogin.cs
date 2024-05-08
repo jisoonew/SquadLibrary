@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,6 +113,63 @@ namespace 스쿼드_도서관
             DataSet ds1 = new DataSet();  //DataSet에 데이터 넣음
             adapter1.Fill(ds1, "manager_notice");  //search1 테이블 채우기
             dataGridView1.DataSource = ds1.Tables["manager_notice"];  // 테이블 보이기
+
+            // 추천 도서
+
+            string query = "SELECT search.책표지 FROM squad_library.recommend reco join squad_library.search1 search on reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3;";
+
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                int pictureBoxIndex = 3; // pictureBox3부터 시작
+                while (reader.Read() && pictureBoxIndex >= 3 && pictureBoxIndex <= 5)
+                {
+                    byte[] imageData = (byte[])reader["책표지"];
+
+                    PictureBox pictureBox = (PictureBox)this.Controls.Find("pictureBox" + pictureBoxIndex, true)[0];
+                    DisplayImageFromDatabase(imageData, pictureBox);
+
+                    pictureBoxIndex++;
+                }
+            }
+
+            // 신착 도서
+            string newBookQuery = "SELECT search.책표지 FROM squad_library.newbook reco join squad_library.search1 search on reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3;";
+
+            MySqlCommand newBookCommand = new MySqlCommand(newBookQuery, connection);
+
+            using (MySqlDataReader reader2 = newBookCommand.ExecuteReader())
+            {
+                int pictureBoxIndex2 = 6;
+                while (reader2.Read() && pictureBoxIndex2 <= 8)
+                {
+                    byte[] imageData2 = (byte[])reader2["책표지"];
+
+                    PictureBox pictureBox2 = (PictureBox)this.Controls.Find("pictureBox" + pictureBoxIndex2, true)[0];
+                    DisplayImageFromDatabase(imageData2, pictureBox2);
+
+                    pictureBoxIndex2++;
+                }
+            }
+        }
+
+        // 이미지 데이터를 PictureBox에 출력하는 함수
+        private void DisplayImageFromDatabase(byte[] imageData, PictureBox pictureBox)
+        {
+            if (imageData != null && imageData.Length > 0)
+            {
+                using (MemoryStream ms = new MemoryStream(imageData))
+                {
+                    pictureBox.Image = Image.FromStream(ms);
+                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+            }
+            else
+            {
+                // 이미지 데이터가 없는 경우 기본 이미지를 설정할 수 있습니다.
+                pictureBox.Image = null;
+            }
         }
 
         private void 추천도서목록ToolStripMenuItem_Click_1(object sender, EventArgs e)

@@ -125,7 +125,7 @@ namespace 스쿼드_도서관
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Location = new System.Drawing.Point(246, 64);
+            this.pictureBox6.Location = new System.Drawing.Point(36, 61);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(88, 111);
             this.pictureBox6.TabIndex = 16;
@@ -133,7 +133,7 @@ namespace 스쿼드_도서관
             // 
             // pictureBox7
             // 
-            this.pictureBox7.Location = new System.Drawing.Point(139, 64);
+            this.pictureBox7.Location = new System.Drawing.Point(139, 61);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(88, 111);
             this.pictureBox7.TabIndex = 15;
@@ -150,7 +150,7 @@ namespace 스쿼드_도서관
             // 
             // pictureBox8
             // 
-            this.pictureBox8.Location = new System.Drawing.Point(30, 64);
+            this.pictureBox8.Location = new System.Drawing.Point(244, 61);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(88, 111);
             this.pictureBox8.TabIndex = 14;

@@ -31,6 +31,7 @@ namespace 스쿼드_도서관
                     MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM squad_library.newbook", connection);
                     MySqlDataAdapter recommendAdapter = new MySqlDataAdapter("SELECT * FROM squad_library.recommend", connection);
                     MySqlDataAdapter bookAdapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.search1", connection);
+                    MySqlCommand mySqlCommand = new MySqlCommand("SELECT count(*) FROM squad_library.search1", connection);
 
                     connection.Open();
 
@@ -48,6 +49,9 @@ namespace 스쿼드_도서관
                     DataSet bookDs = new DataSet();
                     bookAdapter.Fill(bookDs, "bookDs");
                     dataGridView3.DataSource = bookDs.Tables["bookDs"];
+
+                    int selectNum = Convert.ToInt32(mySqlCommand.ExecuteScalar());
+                    label1.Text = "총 " + Convert.ToString(selectNum) + "권 보유";
                 }
             }
             catch (Exception ex)
@@ -62,16 +66,34 @@ namespace 스쿼드_도서관
             DataGridViewRow selectedRow = dataGridView3.SelectedRows[0];
             string bookNum = selectedRow.Cells[0].Value.ToString();
             DateTime today = DateTime.Today;
-            string query = "INSERT INTO squad_library.newbook value('" + bookNum + "', '" + today.ToString("yyyy-MM-dd") + "');";
+
+            // 외래 키 제약 조건 확인 쿼리
+            string checkQuery = "SELECT COUNT(*) FROM squad_library.newbook WHERE 도서번호 = @bookNum";
+
+            string query = "INSERT INTO squad_library.newbook value(@bookNum, @today);";
 
             try
             {
                 using (MySqlConnection myconn = new MySqlConnection(myConnection))
                 {
-                    MySqlCommand cmd = new MySqlCommand(query, myconn);
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    // 외래 키 제약 조건 확인
+                    MySqlCommand checkCmd = new MySqlCommand(checkQuery, myconn);
+                    checkCmd.Parameters.AddWithValue("@bookNum", bookNum);
 
                     myconn.Open();
+
+                    int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                    if (count > 0)
+                    {
+                        MessageBox.Show("이미 지정된 도서입니다.");
+                        return; // 중복 삽입 방지
+                    }
+
+                    MySqlCommand cmd = new MySqlCommand(query, myconn);
+                    cmd.Parameters.AddWithValue("@bookNum", bookNum);
+                    cmd.Parameters.AddWithValue("@today", today.ToString("yyyy-MM-dd"));
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
 
                     DataTable dataTable = new DataTable();
                     adapter.Fill(dataTable);
@@ -83,9 +105,16 @@ namespace 스쿼드_도서관
                 }
 
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                if (ex.Number == 1062) // 1062: Duplicate entry error code
+                {
+                    MessageBox.Show("이미 지정된 도서입니다.");
+                }
+                else
+                {
+                    MessageBox.Show("오류 발생: " + ex.Message);
+                }
             }
         }
 
@@ -95,7 +124,6 @@ namespace 스쿼드_도서관
             //delete를 통해 DB로 삭제된 데이터 전송 - 기본키 기준으로 삭제위치 탐색
             DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
             string bookNum = selectedRow.Cells[0].Value.ToString();
-            Console.Write("응애 : " + bookNum);
             string Query = "delete from squad_library.newbook where 도서번호 = '" + bookNum + "';";
 
             try
@@ -133,17 +161,34 @@ namespace 스쿼드_도서관
             DataGridViewRow selectedRow = dataGridView3.SelectedRows[0];
             string bookNum = selectedRow.Cells[0].Value.ToString();
             DateTime today = DateTime.Today;
-            string query = "INSERT INTO squad_library.recommend value('" + bookNum + "', '" + today.ToString("yyyy-MM-dd") + "');";
+            string query = "INSERT INTO squad_library.recommend value(@bookNum, @today);";
+
+            // 외래 키 제약 조건 확인 쿼리
+            string checkQuery = "SELECT COUNT(*) FROM squad_library.recommend WHERE 도서번호 = @bookNum";
 
             try
             {
                 using (MySqlConnection myconn = new MySqlConnection(myConnection))
                 {
-                    MySqlCommand cmd = new MySqlCommand(query, myconn);
-
-                    MySqlDataAdapter recommend = new MySqlDataAdapter(cmd);
+                    // 외래 키 제약 조건 확인
+                    MySqlCommand checkCmd = new MySqlCommand(checkQuery, myconn);
+                    checkCmd.Parameters.AddWithValue("@bookNum", bookNum);
 
                     myconn.Open();
+
+                    int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                    if (count > 0)
+                    {
+                        MessageBox.Show("이미 지정된 도서입니다.");
+                        return; // 중복 삽입 방지
+                    }
+
+                    MySqlCommand cmd = new MySqlCommand(query, myconn);
+                    cmd.Parameters.AddWithValue("@bookNum", bookNum);
+                    cmd.Parameters.AddWithValue("@today", today.ToString("yyyy-MM-dd"));
+
+                    MySqlDataAdapter recommend = new MySqlDataAdapter(cmd);
 
                     DataTable dataTable = new DataTable();
                     recommend.Fill(dataTable);
@@ -154,9 +199,16 @@ namespace 스쿼드_도서관
                     LoadData2();
                 }
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                if (ex.Number == 1062) // 1062: Duplicate entry error code
+                {
+                    MessageBox.Show("이미 지정된 도서입니다.");
+                }
+                else
+                {
+                    MessageBox.Show("오류 발생: " + ex.Message);
+                }
             }
         }
 
