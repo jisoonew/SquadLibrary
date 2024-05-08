@@ -134,6 +134,34 @@ namespace 스쿼드_도서관
                 }
             }
 
+            string queryLabel = "SELECT search.도서명 FROM squad_library.recommend reco JOIN squad_library.search1 search ON reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3";
+            MySqlCommand commandLabel = new MySqlCommand(queryLabel, connection);
+
+            using (MySqlDataReader readerLabel = commandLabel.ExecuteReader())
+            {
+                int labelIndex = 5; // label5부터 시작
+
+                while (readerLabel.Read() && labelIndex <= 7)
+                {
+                    string bookName = readerLabel["도서명"].ToString();
+
+                    switch (labelIndex)
+                    {
+                        case 5:
+                            label5.Text = bookName;
+                            break;
+                        case 6:
+                            label6.Text = bookName;
+                            break;
+                        case 7:
+                            label7.Text = bookName;
+                            break;
+                    }
+
+                    labelIndex++;
+                }
+            }
+
             // 신착 도서
             string newBookQuery = "SELECT search.책표지 FROM squad_library.newbook reco join squad_library.search1 search on reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3;";
 
@@ -150,6 +178,35 @@ namespace 스쿼드_도서관
                     DisplayImageFromDatabase(imageData2, pictureBox2);
 
                     pictureBoxIndex2++;
+                }
+
+            }
+
+            string queryLabel2 = "SELECT search.도서명 FROM squad_library.newbook reco JOIN squad_library.search1 search ON reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3";
+            MySqlCommand commandLabel2 = new MySqlCommand(queryLabel2, connection);
+
+            using (MySqlDataReader readerLabe2 = commandLabel2.ExecuteReader())
+            {
+                int labelIndex2 = 8; // label8부터 시작
+
+                while (readerLabe2.Read() && labelIndex2 <= 10)
+                {
+                    string bookName2 = readerLabe2["도서명"].ToString();
+
+                    switch (labelIndex2)
+                    {
+                        case 8:
+                            label8.Text = bookName2;
+                            break;
+                        case 9:
+                            label9.Text = bookName2;
+                            break;
+                        case 10:
+                            label10.Text = bookName2;
+                            break;
+                    }
+
+                    labelIndex2++;
                 }
             }
         }
@@ -169,6 +226,33 @@ namespace 스쿼드_도서관
             {
                 // 이미지 데이터가 없는 경우 기본 이미지를 설정할 수 있습니다.
                 pictureBox.Image = null;
+            }
+        }
+
+        private void DisplayBookNamesFromDatabase(MySqlConnection connection, Label[] labels)
+        {
+            try
+            {
+                string query = "SELECT search.도서명 FROM squad_library.recommend reco JOIN squad_library.search1 search ON reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3";
+                MySqlCommand command = new MySqlCommand(query, connection);
+
+                connection.Open();
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    int labelIndex = 0;
+                    while (reader.Read() && labelIndex < labels.Length)
+                    {
+                        string bookName = reader["도서명"].ToString();
+                        labels[labelIndex].Text = bookName;
+
+                        labelIndex++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("오류 발생: " + ex.Message);
             }
         }
 

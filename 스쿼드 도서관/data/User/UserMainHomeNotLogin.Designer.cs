@@ -186,12 +186,12 @@ namespace 스쿼드_도서관
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.pictureBox5);
+            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.pictureBox4);
             this.groupBox3.Controls.Add(this.pictureBox3);
+            this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox3.Location = new System.Drawing.Point(37, 429);
             this.groupBox3.Name = "groupBox3";
@@ -202,30 +202,30 @@ namespace 스쿼드_도서관
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(258, 163);
+            this.label8.AutoEllipsis = true;
+            this.label8.Location = new System.Drawing.Point(24, 161);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(63, 13);
+            this.label8.Size = new System.Drawing.Size(100, 40);
             this.label8.TabIndex = 15;
-            this.label8.Text = "도서 제목";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(148, 163);
+            this.label7.AutoEllipsis = true;
+            this.label7.Location = new System.Drawing.Point(237, 161);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 13);
+            this.label7.Size = new System.Drawing.Size(100, 40);
             this.label7.TabIndex = 14;
-            this.label7.Text = "도서 제목";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(38, 163);
+            this.label5.AutoEllipsis = true;
+            this.label5.Location = new System.Drawing.Point(19, 161);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 13);
+            this.label5.Size = new System.Drawing.Size(100, 40);
             this.label5.TabIndex = 12;
-            this.label5.Text = "도서 제목";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pictureBox5
             // 
@@ -253,11 +253,11 @@ namespace 스쿼드_도서관
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Controls.Add(this.pictureBox6);
             this.groupBox4.Controls.Add(this.pictureBox7);
-            this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.pictureBox8);
             this.groupBox4.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.groupBox4.Location = new System.Drawing.Point(432, 429);
@@ -269,25 +269,25 @@ namespace 스쿼드_도서관
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(257, 162);
+            this.label10.AutoEllipsis = true;
+            this.label10.Location = new System.Drawing.Point(238, 161);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(63, 13);
+            this.label10.Size = new System.Drawing.Size(100, 40);
             this.label10.TabIndex = 18;
-            this.label10.Text = "도서 제목";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(148, 162);
+            this.label9.AutoEllipsis = true;
+            this.label9.Location = new System.Drawing.Point(130, 161);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(63, 13);
+            this.label9.Size = new System.Drawing.Size(100, 40);
             this.label9.TabIndex = 17;
-            this.label9.Text = "도서 제목";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Location = new System.Drawing.Point(246, 43);
+            this.pictureBox6.Location = new System.Drawing.Point(30, 43);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(88, 111);
             this.pictureBox6.TabIndex = 16;
@@ -295,7 +295,7 @@ namespace 스쿼드_도서관
             // 
             // pictureBox7
             // 
-            this.pictureBox7.Location = new System.Drawing.Point(139, 43);
+            this.pictureBox7.Location = new System.Drawing.Point(136, 43);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(88, 111);
             this.pictureBox7.TabIndex = 15;
@@ -303,16 +303,16 @@ namespace 스쿼드_도서관
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(39, 162);
+            this.label6.AutoEllipsis = true;
+            this.label6.Location = new System.Drawing.Point(128, 161);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 13);
+            this.label6.Size = new System.Drawing.Size(100, 40);
             this.label6.TabIndex = 14;
-            this.label6.Text = "도서 제목";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pictureBox8
             // 
-            this.pictureBox8.Location = new System.Drawing.Point(30, 43);
+            this.pictureBox8.Location = new System.Drawing.Point(244, 43);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(88, 111);
             this.pictureBox8.TabIndex = 14;
@@ -518,12 +518,10 @@ namespace 스쿼드_도서관
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
