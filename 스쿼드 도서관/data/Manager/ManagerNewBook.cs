@@ -30,8 +30,8 @@ namespace 스쿼드_도서관
                 {
                     MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM squad_library.newbook", connection);
                     MySqlDataAdapter recommendAdapter = new MySqlDataAdapter("SELECT * FROM squad_library.recommend", connection);
-                    MySqlDataAdapter bookAdapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.search1", connection);
-                    MySqlCommand mySqlCommand = new MySqlCommand("SELECT count(*) FROM squad_library.search1", connection);
+                    MySqlDataAdapter bookAdapter = new MySqlDataAdapter("SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.book", connection);
+                    MySqlCommand mySqlCommand = new MySqlCommand("SELECT count(*) FROM squad_library.book", connection);
 
                     connection.Open();
 
@@ -306,9 +306,9 @@ namespace 스쿼드_도서관
         // 검색
         private void button5_Click(object sender, EventArgs e)
         {
-            string query = "SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.search1 where 도서번호 = @도서번호";
-            string bookNameQuery = "SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.search1 where 도서명 = @도서명";
-            string bookQuery = "SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.search1 where 출판사 = @출판사";
+            string query = "SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.book where 도서번호 = @도서번호";
+            string bookNameQuery = "SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.book where 도서명 = @도서명";
+            string bookQuery = "SELECT 도서번호, 도서명, 글쓴이, 출판사, 페이지 FROM squad_library.book where 출판사 = @출판사";
 
             using (MySqlConnection connection = new MySqlConnection(myConnection))
             {

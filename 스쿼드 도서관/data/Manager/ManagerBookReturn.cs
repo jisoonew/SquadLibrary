@@ -26,7 +26,7 @@ namespace 스쿼드_도서관.data
             try // 대출 회원 정보 DB 연결 (bookrent_user)
             {
                 MySqlDataAdapter userAdap = new MySqlDataAdapter("select DISTINCT u.회원번호, 회원명, 등급, 회원상태, 전화번호, 주소, u.메모 from squad_library.user u inner join squad_library.bookrent br on u.회원번호 = br.회원번호;", conn);
-                MySqlDataAdapter bookAdap = new MySqlDataAdapter("select br.도서번호, s.도서명, s.글쓴이, s.출판사, s.도서상태, br.대출일, br.반납일, br.메모 from squad_library.search1 s inner join squad_library.bookrent br on s.도서번호 = br.도서번호;", conn);
+                MySqlDataAdapter bookAdap = new MySqlDataAdapter("select br.도서번호, s.도서명, s.글쓴이, s.출판사, s.도서상태, br.대출일, br.반납일, br.메모 from squad_library.book s inner join squad_library.bookrent br on s.도서번호 = br.도서번호;", conn);
 
                 conn.Open();
 
@@ -88,11 +88,11 @@ namespace 스쿼드_도서관.data
         public void LoadData2()
         {
             
-            MySqlCommand cmd = new MySqlCommand("select br.도서번호, s.도서명, s.글쓴이, s.출판사, s.도서상태, br.대출일, br.반납일, br.메모 from squad_library.search1 s inner join squad_library.bookrent br on s.도서번호 = br.도서번호;", conn);
+            MySqlCommand cmd = new MySqlCommand("select br.도서번호, s.도서명, s.글쓴이, s.출판사, s.도서상태, br.대출일, br.반납일, br.메모 from squad_library.book s inner join squad_library.bookrent br on s.도서번호 = br.도서번호;", conn);
 
             try
             {
-                using (MySqlDataAdapter adap = new MySqlDataAdapter("select br.도서번호, s.도서명, s.글쓴이, s.출판사, s.도서상태, br.대출일, br.반납일, br.메모 from squad_library.search1 s inner join squad_library.bookrent br on s.도서번호 = br.도서번호;", conn)) {
+                using (MySqlDataAdapter adap = new MySqlDataAdapter("select br.도서번호, s.도서명, s.글쓴이, s.출판사, s.도서상태, br.대출일, br.반납일, br.메모 from squad_library.book s inner join squad_library.bookrent br on s.도서번호 = br.도서번호;", conn)) {
                     
                     conn.Open();
 
@@ -124,12 +124,12 @@ namespace 스쿼드_도서관.data
         {
             string query = "SELECT s.도서번호, s.도서명, s.글쓴이, s.출판사, s.도서상태, br.대출일, br.반납일, br.메모 " +
                                        "FROM squad_library.bookrent br " +
-                                       "INNER JOIN squad_library.search1 s ON br.도서번호 = s.도서번호 " +
+                                       "INNER JOIN squad_library.book s ON br.도서번호 = s.도서번호 " +
                                        "WHERE br.회원번호 = @memberId";
 
             string queryCount = "SELECT count(*) " +
                                        "FROM squad_library.bookrent br " +
-                                       "INNER JOIN squad_library.search1 s ON br.도서번호 = s.도서번호 " +
+                                       "INNER JOIN squad_library.book s ON br.도서번호 = s.도서번호 " +
                                        "WHERE br.회원번호 = @memberId";
 
             DataGridViewRow selectedRow = dataGridView1.Rows[e.RowIndex];

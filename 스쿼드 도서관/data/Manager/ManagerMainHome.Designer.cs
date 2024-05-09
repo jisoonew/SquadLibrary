@@ -130,7 +130,7 @@ namespace 스쿼드_도서관
             this.도서관리ToolStripMenuItem1,
             this.신착추천도서ToolStripMenuItem});
             this.도서관ToolStripMenuItem.Name = "도서관ToolStripMenuItem";
-            this.도서관ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.도서관ToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
             this.도서관ToolStripMenuItem.Text = "도서 관리";
             this.도서관ToolStripMenuItem.Click += new System.EventHandler(this.도서관ToolStripMenuItem_Click);
             // 
@@ -151,21 +151,21 @@ namespace 스쿼드_도서관
             // 도서검색ToolStripMenuItem
             // 
             this.도서검색ToolStripMenuItem.Name = "도서검색ToolStripMenuItem";
-            this.도서검색ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.도서검색ToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
             this.도서검색ToolStripMenuItem.Text = "도서 검색";
             this.도서검색ToolStripMenuItem.Click += new System.EventHandler(this.도서검색ToolStripMenuItem_Click);
             // 
             // 신청구매도서목록ToolStripMenuItem
             // 
             this.신청구매도서목록ToolStripMenuItem.Name = "신청구매도서목록ToolStripMenuItem";
-            this.신청구매도서목록ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.신청구매도서목록ToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
             this.신청구매도서목록ToolStripMenuItem.Text = "신청 도서";
             this.신청구매도서목록ToolStripMenuItem.Click += new System.EventHandler(this.신청구매도서목록ToolStripMenuItem_Click);
             // 
             // 구매도서ToolStripMenuItem
             // 
             this.구매도서ToolStripMenuItem.Name = "구매도서ToolStripMenuItem";
-            this.구매도서ToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.구매도서ToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
             this.구매도서ToolStripMenuItem.Text = "구매 도서";
             this.구매도서ToolStripMenuItem.Click += new System.EventHandler(this.구매도서ToolStripMenuItem_Click);
             // 
@@ -282,7 +282,7 @@ namespace 스쿼드_도서관
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ManagerMainHome";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "manager_Hompage2";
+            this.Text = "Squad Library";
             this.Load += new System.EventHandler(this.manager_Hompage2_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

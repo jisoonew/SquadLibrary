@@ -190,7 +190,6 @@ namespace 스쿼드_도서관
             this.Name = "UserBookSearch";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User_Homepage2";
-            this.Load += new System.EventHandler(this.User_Search1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

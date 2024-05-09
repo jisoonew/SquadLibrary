@@ -32,21 +32,21 @@ namespace 스쿼드_도서관
 
             else if (this.comboBox1.Text == "도서명")
             {
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 책번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 대출여부,메모  FROM squad_library.search1 where 도서명 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 책번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 대출여부,메모  FROM squad_library.book where 도서명 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
                 connection.Open();  // DB 연결 시작
 
                 DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                adapter.Fill(ds, "search1");  //search1 테이블 채우기
+                adapter.Fill(ds, "book");  //book 테이블 채우기
 
                 // 데이터가 없는 경우 처리
-                if (ds.Tables["search1"].Rows.Count == 0)
+                if (ds.Tables["book"].Rows.Count == 0)
                 {
                     MessageBox.Show("검색 결과가 없습니다."); // 콘솔에 메시지 출력
                 }
                 else
                 {
-                    us3.dataGridView1.DataSource = ds.Tables["search1"];  // 테이블 보이기
+                    us3.dataGridView1.DataSource = ds.Tables["book"];  // 테이블 보이기
                     us3.pictureBox2.Load(@"C:\Users\pjsu2\OneDrive\바탕 화면\스쿼드 도서 이미지\" + this.textBox1.Text + ".jpg");
                     us3.pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
                     us3.Show();
@@ -55,21 +55,21 @@ namespace 스쿼드_도서관
 
             else if (this.comboBox1.Text == "글쓴이")
             {
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 책번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 대출여부,메모  FROM squad_library.search1 where 글쓴이 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 책번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 대출여부,메모  FROM squad_library.book where 글쓴이 = '" + this.textBox1.Text + "'", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
                 connection.Open();  // DB 연결 시작
 
                 DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                adapter.Fill(ds, "search1");  //search1 테이블 채우기
+                adapter.Fill(ds, "book");  //book 테이블 채우기
 
                 // 데이터가 없는 경우 처리
-                if (ds.Tables["search1"].Rows.Count == 0)
+                if (ds.Tables["book"].Rows.Count == 0)
                 {
                     MessageBox.Show("검색 결과가 없습니다."); // 콘솔에 메시지 출력
                 }
                 else
                 {
-                    us3.dataGridView1.DataSource = ds.Tables["search1"];  // 테이블 보이기
+                    us3.dataGridView1.DataSource = ds.Tables["book"];  // 테이블 보이기
                     us3.pictureBox2.Load(@"C:\Users\pjsu2\OneDrive\바탕 화면\스쿼드 도서 이미지\" + this.textBox1.Text + ".jpg");
                     us3.pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
                     us3.Show();
@@ -88,35 +88,34 @@ namespace 스쿼드_도서관
             UserAllSearch us3 = new UserAllSearch();
             us3.Show();
 
-            MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 책번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 대출여부,메모  FROM squad_library.search1", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+            MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 도서명, 책번호, 글쓴이, 출판사, 출판일, 페이지, 도서가격, 도서상태, 대출여부,메모  FROM squad_library.book", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
             connection.Open();  // DB 연결 시작
 
             DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-            adapter.Fill(ds, "search1");  //search1 테이블 채우기
-            us3.dataGridView1.DataSource = ds.Tables["search1"];  // 테이블 보이기
+            adapter.Fill(ds, "book");  //book 테이블 채우기
+            us3.dataGridView1.DataSource = ds.Tables["book"];  // 테이블 보이기
         }
 
         private void User_Homepage1_Load(object sender, EventArgs e)
         {
-            MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 제목, 내용 FROM squad_library.question1", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+            MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT 제목 FROM squad_library.question1", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
             connection.Open();  // DB 연결 시작
 
             DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-            adapter.Fill(ds, "question1");  //search1 테이블 채우기
+            adapter.Fill(ds, "question1");  //book 테이블 채우기
             dataGridView2.DataSource = ds.Tables["question1"];  // 테이블 보이기
 
 
-            MySqlDataAdapter adapter1 = new MySqlDataAdapter("SELECT 제목, 내용 FROM squad_library.manager_notice", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
+            MySqlDataAdapter adapter1 = new MySqlDataAdapter("SELECT 제목 FROM squad_library.manager_notice", connection);  // 콤보 박스 옆에 텍스트 박스 값 DB에 넣기
 
             DataSet ds1 = new DataSet();  //DataSet에 데이터 넣음
-            adapter1.Fill(ds1, "manager_notice");  //search1 테이블 채우기
+            adapter1.Fill(ds1, "manager_notice");  //book 테이블 채우기
             dataGridView1.DataSource = ds1.Tables["manager_notice"];  // 테이블 보이기
 
             // 추천 도서
-
-            string query = "SELECT search.책표지 FROM squad_library.recommend reco join squad_library.search1 search on reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3;";
+            string query = "SELECT search.책표지 FROM squad_library.recommend reco join squad_library.book search on reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3;";
 
             MySqlCommand command = new MySqlCommand(query, connection);
 
@@ -134,7 +133,7 @@ namespace 스쿼드_도서관
                 }
             }
 
-            string queryLabel = "SELECT search.도서명 FROM squad_library.recommend reco JOIN squad_library.search1 search ON reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3";
+            string queryLabel = "SELECT search.도서명 FROM squad_library.recommend reco JOIN squad_library.book search ON reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3";
             MySqlCommand commandLabel = new MySqlCommand(queryLabel, connection);
 
             using (MySqlDataReader readerLabel = commandLabel.ExecuteReader())
@@ -163,7 +162,7 @@ namespace 스쿼드_도서관
             }
 
             // 신착 도서
-            string newBookQuery = "SELECT search.책표지 FROM squad_library.newbook reco join squad_library.search1 search on reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3;";
+            string newBookQuery = "SELECT search.책표지 FROM squad_library.newbook reco join squad_library.book search on reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3;";
 
             MySqlCommand newBookCommand = new MySqlCommand(newBookQuery, connection);
 
@@ -182,7 +181,7 @@ namespace 스쿼드_도서관
 
             }
 
-            string queryLabel2 = "SELECT search.도서명 FROM squad_library.newbook reco JOIN squad_library.search1 search ON reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3";
+            string queryLabel2 = "SELECT search.도서명 FROM squad_library.newbook reco JOIN squad_library.book search ON reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3";
             MySqlCommand commandLabel2 = new MySqlCommand(queryLabel2, connection);
 
             using (MySqlDataReader readerLabe2 = commandLabel2.ExecuteReader())
@@ -233,7 +232,7 @@ namespace 스쿼드_도서관
         {
             try
             {
-                string query = "SELECT search.도서명 FROM squad_library.recommend reco JOIN squad_library.search1 search ON reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3";
+                string query = "SELECT search.도서명 FROM squad_library.recommend reco JOIN squad_library.book search ON reco.도서번호 = search.도서번호 ORDER BY reco.등록 DESC LIMIT 3";
                 MySqlCommand command = new MySqlCommand(query, connection);
 
                 connection.Open();

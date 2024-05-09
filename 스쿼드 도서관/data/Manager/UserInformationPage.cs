@@ -189,43 +189,48 @@ namespace 스쿼드_도서관.data
             }
             else
             {
-                //delete를 통해 DB로 삭제된 데이터 전송 - 기본키 기준으로 삭제위치 탐색
                 string Query = "delete from squad_library.user where 회원번호 ='" + this.userNum.Text + "';";
-                string rentQuery = "delete from squad_library.bookrent where 회원번호 = @회원번호";
-                MySqlConnection rentConnection = new MySqlConnection(query);
-                MySqlCommand rentDelete = new MySqlCommand(rentQuery, rentConnection);
-                rentDelete.Parameters.AddWithValue("@회원번호", userNum.Text);
-
+                string rentQuery = "delete from squad_library.bookrent where 회원번호 ='" + this.userNum.Text + "';";
                 MySqlConnection conDataBase = new MySqlConnection(query);
                 MySqlCommand cmdDatabase = new MySqlCommand(Query, conDataBase);
-                MySqlDataReader myReader;
+                MySqlConnection rentConnection = new MySqlConnection(query); // 대출 테이블에 대한 연결 설정
+                MySqlCommand rentDelete = new MySqlCommand(rentQuery, rentConnection); // 대출 테이블에 대한 쿼리 설정
 
                 try
                 {
                     conDataBase.Open();
-                    myReader = cmdDatabase.ExecuteReader();
+                    int rowsDeleted = cmdDatabase.ExecuteNonQuery(); // 회원 정보 삭제
 
-                    while (myReader.Read())
+                    if (rowsDeleted > 0)
                     {
-                        int query = cmdDatabase.ExecuteNonQuery(); // 삭제를 진행하고 영향을 받은 행의 수를 반환
-                        int rentEx = rentDelete.ExecuteNonQuery();
+                        rentConnection.Open(); // 대출 정보 삭제를 위해 대출 테이블 연결 열기
+                        int rentRowsDeleted = rentDelete.ExecuteNonQuery(); // 대출 정보 삭제
 
-                        if (query > 0 || rentEx > 0)
+                        if (rentRowsDeleted > 0)
                         {
                             MessageBox.Show("회원 정보를 삭제했습니다.");
                         }
                         else
                         {
-                            MessageBox.Show("회원 정보를 삭제할 수 없습니다.");
+                            MessageBox.Show("회원 정보를 삭제했습니다.");
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("회원 정보를 삭제할 수 없습니다.");
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
+                finally
+                {
+                    conDataBase.Close(); // 연결 닫기
+                    rentConnection.Close(); // 대출 테이블 연결 닫기
+                }
 
-                LoadData();
+                LoadData(); // 데이터 다시 로드
             }
         }
 
@@ -277,7 +282,7 @@ namespace 스쿼드_도서관.data
                     conn.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "user");  //search1 테이블 채우기
+                    adapter.Fill(ds, "user");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["user"];  // 테이블 보이기
 
                     conn.Close();
@@ -296,7 +301,7 @@ namespace 스쿼드_도서관.data
                     conn.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "user");  //search1 테이블 채우기
+                    adapter.Fill(ds, "user");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["user"];  // 테이블 보이기
 
                     conn.Close();
@@ -314,7 +319,7 @@ namespace 스쿼드_도서관.data
                     conn.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "user");  //search1 테이블 채우기
+                    adapter.Fill(ds, "user");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["user"];  // 테이블 보이기
 
                     conn.Close();
@@ -332,7 +337,7 @@ namespace 스쿼드_도서관.data
                     conn.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "user");  //search1 테이블 채우기
+                    adapter.Fill(ds, "user");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["user"];  // 테이블 보이기
 
                     conn.Close();
@@ -350,7 +355,7 @@ namespace 스쿼드_도서관.data
                     conn.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "user");  //search1 테이블 채우기
+                    adapter.Fill(ds, "user");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["user"];  // 테이블 보이기
 
                     conn.Close();
@@ -368,7 +373,7 @@ namespace 스쿼드_도서관.data
                     conn.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "user");  //search1 테이블 채우기
+                    adapter.Fill(ds, "user");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["user"];  // 테이블 보이기
 
                     conn.Close();
@@ -403,5 +408,6 @@ namespace 스쿼드_도서관.data
 
             LoadData();
         }
+
     }
 }

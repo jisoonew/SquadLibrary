@@ -118,7 +118,7 @@ namespace 스쿼드_도서관
                     connection.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "question1");  //search1 테이블 채우기
+                    adapter.Fill(ds, "question1");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["question1"];  // 테이블 보이기
                 }
                 catch (Exception ex)
@@ -137,7 +137,7 @@ namespace 스쿼드_도서관
                     connection.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "alluser");  //search1 테이블 채우기
+                    adapter.Fill(ds, "alluser");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["alluser"];  // 테이블 보이기
                 }
                 catch (Exception ex)
@@ -156,7 +156,7 @@ namespace 스쿼드_도서관
                     connection.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "alluser");  //search1 테이블 채우기
+                    adapter.Fill(ds, "alluser");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["alluser"];  // 테이블 보이기
                 }
                 catch (Exception ex)
@@ -175,7 +175,7 @@ namespace 스쿼드_도서관
                     connection.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "question1");  //search1 테이블 채우기
+                    adapter.Fill(ds, "question1");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["question1"];  // 테이블 보이기
                 }
                 catch (Exception ex)
@@ -194,7 +194,7 @@ namespace 스쿼드_도서관
                     connection.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "question1");  //search1 테이블 채우기
+                    adapter.Fill(ds, "question1");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["question1"];  // 테이블 보이기
                 }
                 catch (Exception ex)

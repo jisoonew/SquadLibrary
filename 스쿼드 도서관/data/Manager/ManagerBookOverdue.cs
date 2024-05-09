@@ -64,7 +64,7 @@ namespace 스쿼드_도서관.data
 
             try // 대출 회원 정보 DB 연결 (bookrent_user)
             {
-                MySqlDataAdapter adap = new MySqlDataAdapter("select rent.도서번호, search.도서명, search.글쓴이, search.출판사, search.도서상태, rent.대출일, rent.반납일, rent.메모 from squad_library.bookrent rent join squad_library.search1 search on rent.도서번호 = search.도서번호", conn);
+                MySqlDataAdapter adap = new MySqlDataAdapter("select rent.도서번호, search.도서명, search.글쓴이, search.출판사, search.도서상태, rent.대출일, rent.반납일, rent.메모 from squad_library.bookrent rent join squad_library.book search on rent.도서번호 = search.도서번호", conn);
 
                 conn.Open();
 
@@ -96,13 +96,13 @@ namespace 스쿼드_도서관.data
 
             try  // 도서 정보 DB 연결
             {
-                MySqlDataAdapter adap = new MySqlDataAdapter("select 도서번호,도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일, 메모 from squad_library.search1", conn);
+                MySqlDataAdapter adap = new MySqlDataAdapter("select 도서번호,도서명, 글쓴이, 출판사, 도서상태, 대출여부, 대출일, 반납일, 메모 from squad_library.book", conn);
 
                 conn.Open();
 
                 DataSet ds = new DataSet();
-                //adap.Fill(ds, "search1");
-                //dataGridView2.DataSource = ds.Tables["search1"];
+                //adap.Fill(ds, "book");
+                //dataGridView2.DataSource = ds.Tables["book"];
                 conn.Close();
             }
             catch (Exception ex)
@@ -161,7 +161,7 @@ namespace 스쿼드_도서관.data
                 textBox7.Text = dataGridView1.Rows[e.RowIndex].Cells[5].Value.ToString(); // 주소
                 textBox8.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString(); // 메모
 
-                MySqlDataAdapter adap = new MySqlDataAdapter("select rent.도서번호, search.도서명, search.글쓴이, search.출판사, search.도서상태, rent.대출일, rent.반납일, rent.메모 from squad_library.bookrent rent join squad_library.search1 search on rent.도서번호 = search.도서번호 WHERE date(rent.반납일) < date(now()) and rent.회원번호 = '" + textBox19.Text + "';", conn);
+                MySqlDataAdapter adap = new MySqlDataAdapter("select rent.도서번호, search.도서명, search.글쓴이, search.출판사, search.도서상태, rent.대출일, rent.반납일, rent.메모 from squad_library.bookrent rent join squad_library.book search on rent.도서번호 = search.도서번호 WHERE date(rent.반납일) < date(now()) and rent.회원번호 = '" + textBox19.Text + "';", conn);
                 DataSet ds = new DataSet();
                 adap.Fill(ds, "bookrent_user");
                 dataGridView2.DataSource = ds.Tables["bookrent_user"];
@@ -254,7 +254,7 @@ namespace 스쿼드_도서관.data
 
                     MessageBox.Show("도서를 반납하였습니다.");
 
-                    MySqlDataAdapter loadbookRent = new MySqlDataAdapter("select rent.도서번호, search.도서명, search.글쓴이, search.출판사, search.도서상태, rent.대출일, rent.반납일, rent.메모 from squad_library.bookrent rent join squad_library.search1 search on rent.도서번호 = search.도서번호 where date(rent.반납일) < date(now());", conn);
+                    MySqlDataAdapter loadbookRent = new MySqlDataAdapter("select rent.도서번호, search.도서명, search.글쓴이, search.출판사, search.도서상태, rent.대출일, rent.반납일, rent.메모 from squad_library.bookrent rent join squad_library.book search on rent.도서번호 = search.도서번호 where date(rent.반납일) < date(now());", conn);
                     DataSet dataTable = new DataSet();
                     loadbookRent.Fill(dataTable, "dataTable");
                     BindingSource bindingSource = new BindingSource();

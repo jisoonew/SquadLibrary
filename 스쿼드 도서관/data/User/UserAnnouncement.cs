@@ -75,7 +75,7 @@ namespace 스쿼드_도서관
                     connection.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "manager_notice");  //search1 테이블 채우기
+                    adapter.Fill(ds, "manager_notice");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["manager_notice"];  // 테이블 보이기
                 }
                 catch (Exception ex)
@@ -94,7 +94,7 @@ namespace 스쿼드_도서관
                     connection.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "manager_notice");  //search1 테이블 채우기
+                    adapter.Fill(ds, "manager_notice");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["manager_notice"];  // 테이블 보이기
                 }
                 catch (Exception ex)
@@ -113,7 +113,7 @@ namespace 스쿼드_도서관
                     connection.Open();  // DB 연결 시작
 
                     DataSet ds = new DataSet();  //DataSet에 데이터 넣음
-                    adapter.Fill(ds, "manager_notice");  //search1 테이블 채우기
+                    adapter.Fill(ds, "manager_notice");  //book 테이블 채우기
                     dataGridView1.DataSource = ds.Tables["manager_notice"];  // 테이블 보이기
                 }
                 catch (Exception ex)

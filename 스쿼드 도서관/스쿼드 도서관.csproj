@@ -151,6 +151,12 @@
     <Compile Include="data\Manager\ManagerNotice.Designer.cs">
       <DependentUpon>ManagerNotice.cs</DependentUpon>
     </Compile>
+    <Compile Include="data\User\Notice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="data\User\Notice.Designer.cs">
+      <DependentUpon>Notice.cs</DependentUpon>
+    </Compile>
     <Compile Include="data\User\UserMydata.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -443,6 +449,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="data\Manager\ManagerNotice.resx">
       <DependentUpon>ManagerNotice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="data\User\Notice.resx">
+      <DependentUpon>Notice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="data\User\UserMydata.resx">
       <DependentUpon>UserMydata.cs</DependentUpon>
